@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/assets/main.css">
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Albert Mata</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          <a class="page-link" href="/">Home</a><a class="page-link" href="/notes/">Notes</a><a class="page-link" href="/skills/">Skills</a><a class="page-link" href="/privacy/">Privacy</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">FunProg week 3: Data &amp; abstraction</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2013-02-08T00:00:00+01:00" itemprop="datePublished">Feb 8, 2013
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><em>In September 2012, I enrolled in the course <a href="https://www.coursera.org/course/progfun">Functional Programming Principles in Scala</a> given by Martin Odersky at Coursera. In that course I learnt about functional programming and how it can be effectively combined with object-oriented programming. The series [FunProg week] are my compiled notes from that course.</em></p>
+
+<h2 id="classes">Classes</h2>
+
+<p>Using classes, we can encapsulate functions and data structures. In Scala we define them with this syntax:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Rational</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">private</span> <span class="k">def</span> <span class="nf">gcd</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
+	<span class="nf">if</span> <span class="o">(</span><span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="n">a</span> <span class="k">else</span> <span class="nf">gcd</span><span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span><span class="o">)</span>
+  <span class="k">private</span> <span class="k">val</span> <span class="nv">g</span> <span class="k">=</span> <span class="nf">gcd</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span>
+
+  <span class="k">def</span> <span class="nf">numer</span> <span class="k">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">g</span> <span class="c1">// numerator    </span>
+  <span class="k">def</span> <span class="nf">denom</span> <span class="k">=</span> <span class="n">y</span> <span class="o">/</span> <span class="n">g</span> <span class="c1">// denominator</span>
+
+  <span class="c1">// Second constructor (using just a numerator)    </span>
+  <span class="k">def</span> <span class="nf">this</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="nf">this</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+
+  <span class="k">def</span> <span class="nf">add</span><span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">Rational</span><span class="o">)</span> <span class="k">=</span>
+	<span class="k">new</span> <span class="nc">Rational</span><span class="o">(</span>
+	  <span class="k">this</span><span class="o">.</span><span class="py">numer</span> <span class="o">*</span> <span class="nv">that</span><span class="o">.</span><span class="py">denom</span> <span class="o">+</span> <span class="nv">that</span><span class="o">.</span><span class="py">numer</span> <span class="o">*</span> <span class="k">this</span><span class="o">.</span><span class="py">denom</span><span class="o">,</span>
+	  <span class="k">this</span><span class="o">.</span><span class="py">denom</span> <span class="o">*</span> <span class="nv">that</span><span class="o">.</span><span class="py">denom</span>
+
+  <span class="k">def</span> <span class="nf">neg</span><span class="k">:</span> <span class="kt">Rational</span> <span class="o">=</span>
+	<span class="k">new</span> <span class="nc">Rational</span><span class="o">(-</span><span class="k">this</span><span class="o">.</span><span class="py">numer</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="py">denom</span><span class="o">)</span>
+
+  <span class="k">def</span> <span class="nf">sub</span><span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">Rational</span><span class="o">)</span> <span class="k">=</span> 
+	<span class="k">this</span><span class="o">.</span><span class="py">add</span><span class="o">(</span><span class="nv">that</span><span class="o">.</span><span class="py">neg</span><span class="o">)</span>
+
+  <span class="k">def</span> <span class="nf">less</span><span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">Rational</span><span class="o">)</span> <span class="k">=</span>
+	<span class="k">this</span><span class="o">.</span><span class="py">numer</span> <span class="o">*</span> <span class="nv">that</span><span class="o">.</span><span class="py">denom</span> <span class="o">&lt;</span> <span class="nv">that</span><span class="o">.</span><span class="py">numer</span> <span class="o">*</span> <span class="k">this</span><span class="o">.</span><span class="py">denom</span>
+
+  <span class="k">def</span> <span class="nf">max</span><span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">Rational</span><span class="o">)</span> <span class="k">=</span>
+	<span class="nf">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="py">less</span><span class="o">(</span><span class="n">that</span><span class="o">))</span> <span class="n">that</span> <span class="k">else</span> <span class="k">this</span>
+
+  <span class="c1">// Useful to customize how an object has to be shown    </span>
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">toString</span> <span class="k">=</span>
+	<span class="k">this</span><span class="o">.</span><span class="py">numer</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="py">denom</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This definition introduces a new type (<code class="language-plaintext highlighter-rouge">Rational</code>) and a primary constructor to create elements of this type. We also have some definitions inside, being private the first two (<code class="language-plaintext highlighter-rouge">gcd</code> and <code class="language-plaintext highlighter-rouge">g</code>) so they can only be called from inside the <code class="language-plaintext highlighter-rouge">Rational</code> class.</p>
+
+<p>Remember that the difference between <code class="language-plaintext highlighter-rouge">def</code> and <code class="language-plaintext highlighter-rouge">val</code> is that while <code class="language-plaintext highlighter-rouge">def</code> makes the right hand side be evaluated on each use, <code class="language-plaintext highlighter-rouge">val</code> only evaluates once, at the point of the definition itself.</p>
+
+<p>It’s also possible to create more constructors for a class with this syntax, in which we create a second constructor that just takes an argument and calls the primary constructor:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">this</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="nf">this</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Please note that the use of <code class="language-plaintext highlighter-rouge">this</code> to refer to the object on which a method is executed is optional, but can be useful for readability reasons.</p>
+
+<p>As in standard object oriented programming, we call the elements of a class type objects, and we create them and call their members with the quite common syntax:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Rational</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span> <span class="c1">// 1/2</span>
+<span class="k">val</span> <span class="nv">y</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Rational</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span> <span class="c1">// 3/4</span>
+<span class="nv">x</span><span class="o">.</span><span class="py">numer</span>                    <span class="c1">// 1</span>
+<span class="nv">x</span><span class="o">.</span><span class="py">denom</span>                    <span class="c1">// 2</span>
+<span class="nv">x</span><span class="o">.</span><span class="py">add</span><span class="o">(</span><span class="n">y</span><span class="o">)</span>                   <span class="c1">// 5/4</span>
+<span class="nv">y</span><span class="o">.</span><span class="py">sub</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>                   <span class="c1">// 1/4</span>
+<span class="nv">x</span><span class="o">.</span><span class="py">less</span><span class="o">(</span><span class="n">y</span><span class="o">)</span>                  <span class="c1">// true</span>
+<span class="nv">x</span><span class="o">.</span><span class="py">max</span><span class="o">(</span><span class="n">y</span><span class="o">)</span>                   <span class="c1">// 3/4</span>
+<span class="k">val</span> <span class="nv">z</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Rational</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>    <span class="c1">// 5/1</span>
+</code></pre></div></div>
+
+<h2 id="preconditions-and-assertions">Preconditions and assertions</h2>
+
+<p>It’s possible to force a precondition for our class. Let’s say we want our <code class="language-plaintext highlighter-rouge">Rational</code> objects to have a positive denominator, we can do it adding this at the very beginning:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">require</span><span class="o">(</span><span class="n">y</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">,</span> <span class="s">"denominator cannot be zero"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>This <code class="language-plaintext highlighter-rouge">require</code> function is a predefined function that takes a condition and an optional customized message string. If the precondition isn’t fulfilled, an IllegalArgumentException with our customized error message is raised.</p>
+
+<p>It’s also possible to set assertions to check the code of a function. We do it this way:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">assert</span><span class="o">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>If the assertion fails, an AssertionError exception will be raised.</p>
+
+<h2 id="operators">Operators</h2>
+
+<p>In our previous example, if we want to sum two <code class="language-plaintext highlighter-rouge">Rational</code> numbers we need to write <code class="language-plaintext highlighter-rouge">r.add(s)</code> but, in general, we are used to sum numbers just doing <code class="language-plaintext highlighter-rouge">r + s</code>. In Scala we can eliminate this difference in two steps.</p>
+
+<p>The first step is introducing infix notation for methods. That means that any method with a parameter can be used like an infix operator this way:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">r</span><span class="o">.</span><span class="py">add</span><span class="o">(</span><span class="n">s</span><span class="o">)</span>  <span class="o">==</span> <span class="n">r</span> <span class="n">add</span> <span class="n">s</span>
+<span class="nv">r</span><span class="o">.</span><span class="py">less</span><span class="o">(</span><span class="n">s</span><span class="o">)</span> <span class="o">==</span> <span class="n">r</span> <span class="n">less</span> <span class="n">s</span>
+<span class="nv">r</span><span class="o">.</span><span class="py">max</span><span class="o">(</span><span class="n">s</span><span class="o">)</span>  <span class="o">==</span> <span class="n">r</span> <span class="n">max</span> <span class="n">s</span>
+</code></pre></div></div>
+
+<p>The second step is about relaxing the formal form of identifiers, so an identifier like <code class="language-plaintext highlighter-rouge">+</code> can be a valid one. So in Scala <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">+?%&amp;</code> are valid identifiers.</p>
+
+<p>With all this in mind, we can rewrite our previous <code class="language-plaintext highlighter-rouge">Rational</code> class into this new <code class="language-plaintext highlighter-rouge">RationalOperator</code> class (the class does exactly the same, we are using a different name just to avoid conflicts ant make it clear):</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">RationalOperator</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nf">require</span><span class="o">(</span><span class="n">y</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">,</span> <span class="s">"denominator cannot be zero"</span><span class="o">)</span>
+
+  <span class="c1">// Useful to show 1/4 instead of 2/8</span>
+  <span class="k">private</span> <span class="k">def</span> <span class="nf">gcd</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
+	<span class="nf">if</span> <span class="o">(</span><span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="n">a</span> <span class="k">else</span> <span class="nf">gcd</span><span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span><span class="o">)</span>
+  <span class="k">private</span> <span class="k">val</span> <span class="nv">g</span> <span class="k">=</span> <span class="nf">gcd</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span>
+
+  <span class="k">def</span> <span class="nf">numer</span> <span class="k">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">g</span> <span class="c1">// numerator</span>
+  <span class="k">def</span> <span class="nf">denom</span> <span class="k">=</span> <span class="n">y</span> <span class="o">/</span> <span class="n">g</span> <span class="c1">// denominator</span>
+
+  <span class="c1">// Second constructor (using just a numerator)</span>
+  <span class="k">def</span> <span class="nf">this</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="nf">this</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+
+  <span class="k">def</span> <span class="nf">+</span> <span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">RationalOperator</span><span class="o">)</span> <span class="k">=</span>
+	<span class="k">new</span> <span class="nc">RationalOperator</span><span class="o">(</span>
+	  <span class="k">this</span><span class="o">.</span><span class="py">numer</span> <span class="o">*</span> <span class="nv">that</span><span class="o">.</span><span class="py">denom</span> <span class="o">+</span> <span class="nv">that</span><span class="o">.</span><span class="py">numer</span> <span class="o">*</span> <span class="k">this</span><span class="o">.</span><span class="py">denom</span><span class="o">,</span>
+	  <span class="k">this</span><span class="o">.</span><span class="py">denom</span> <span class="o">*</span> <span class="nv">that</span><span class="o">.</span><span class="py">denom</span><span class="o">)</span>
+
+  <span class="k">def</span> <span class="nf">unary_-</span> <span class="k">:</span> <span class="kt">RationalOperator</span> <span class="o">=</span>
+	<span class="k">new</span> <span class="nc">RationalOperator</span><span class="o">(-</span><span class="k">this</span><span class="o">.</span><span class="py">numer</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="py">denom</span><span class="o">)</span>
+
+  <span class="k">def</span> <span class="nf">-</span> <span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">RationalOperator</span><span class="o">)</span> <span class="k">=</span>
+	<span class="k">this</span> <span class="o">+</span> <span class="o">-</span><span class="n">that</span>
+
+  <span class="k">def</span> <span class="nf">&lt;</span> <span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">RationalOperator</span><span class="o">)</span> <span class="k">=</span>
+	<span class="k">this</span><span class="o">.</span><span class="py">numer</span> <span class="o">*</span> <span class="nv">that</span><span class="o">.</span><span class="py">denom</span> <span class="o">&lt;</span> <span class="nv">that</span><span class="o">.</span><span class="py">numer</span> <span class="o">*</span> <span class="k">this</span><span class="o">.</span><span class="py">denom</span>
+
+  <span class="k">def</span> <span class="nf">max</span><span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">RationalOperator</span><span class="o">)</span> <span class="k">=</span>
+	<span class="nf">if</span> <span class="o">(</span><span class="k">this</span> <span class="o">&lt;</span> <span class="n">that</span><span class="o">)</span> <span class="n">that</span> <span class="k">else</span> <span class="k">this</span>
+
+  <span class="c1">// Useful to customize how an object has to be shown</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">toString</span> <span class="k">=</span>
+	<span class="k">this</span><span class="o">.</span><span class="py">numer</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="py">denom</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>And now we check it works:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Rational</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span> <span class="c1">// 1/2</span>
+<span class="k">val</span> <span class="nv">y</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Rational</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span> <span class="c1">// 3/4</span>
+<span class="nv">x</span><span class="o">.</span><span class="py">numer</span>                    <span class="c1">// 1</span>
+<span class="nv">x</span><span class="o">.</span><span class="py">denom</span>                    <span class="c1">// 2</span>
+<span class="n">x</span> <span class="o">+</span> <span class="n">y</span>                      <span class="c1">// 5/4</span>
+<span class="n">y</span> <span class="o">-</span> <span class="n">x</span>                      <span class="c1">// 1/4</span>
+<span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span>                      <span class="c1">// true</span>
+<span class="n">x</span> <span class="n">max</span> <span class="n">y</span>                    <span class="c1">// 3/4</span>
+</code></pre></div></div>
+
+<p>In Scala the precedence of different operators is determined by its first character. But anyway we always can use parenthesis to make it clear.</p>
+
+<h2 id="abstract-classes">Abstract classes</h2>
+
+<p>We are going to see this topic working with an example based on binary trees.</p>
+
+<p>Abstract classes can contain members which are missing an implementation, so no instances of an abstract class can be created with the operator <code class="language-plaintext highlighter-rouge">new</code>.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">abstract</span> <span class="k">class</span> <span class="nc">IntSet</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">contains</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span>
+  <span class="k">def</span> <span class="nf">incl</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">IntSet</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>So in order to create actual objects we first need some class or classes that extend the abstract one (and are not abstract themselves):</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Empty</span> <span class="k">extends</span> <span class="nc">IntSet</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">contains</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">false</span>
+  <span class="k">def</span> <span class="nf">incl</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">IntSet</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NonEmpty</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Empty</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Empty</span><span class="o">)</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">toString</span> <span class="k">=</span> <span class="s">"."</span>
+<span class="o">}</span>
+
+<span class="k">class</span> <span class="nc">NonEmpty</span><span class="o">(</span><span class="n">elem</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">left</span><span class="k">:</span> <span class="kt">IntSet</span><span class="o">,</span> <span class="n">right</span><span class="k">:</span> <span class="kt">IntSet</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">IntSet</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">contains</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span>
+	<span class="nf">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">elem</span><span class="o">)</span> <span class="n">left</span> <span class="n">contains</span> <span class="n">x</span>
+	<span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">elem</span><span class="o">)</span> <span class="n">right</span> <span class="n">contains</span> <span class="n">x</span>
+	<span class="k">else</span> <span class="kc">true</span>
+  <span class="k">def</span> <span class="nf">incl</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">IntSet</span> <span class="o">=</span>
+	<span class="nf">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">elem</span><span class="o">)</span> <span class="k">new</span> <span class="nc">NonEmpty</span><span class="o">(</span><span class="n">elem</span><span class="o">,</span> <span class="n">left</span> <span class="n">incl</span> <span class="n">x</span><span class="o">,</span> <span class="n">right</span><span class="o">)</span>
+	<span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">elem</span><span class="o">)</span> <span class="k">new</span> <span class="nc">NonEmpty</span><span class="o">(</span><span class="n">elem</span><span class="o">,</span> <span class="n">left</span><span class="o">,</span> <span class="n">right</span> <span class="n">incl</span> <span class="n">x</span><span class="o">)</span>
+	<span class="k">else</span> <span class="k">this</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">toString</span> <span class="k">=</span> <span class="s">"{"</span> <span class="o">+</span> <span class="n">left</span> <span class="o">+</span> <span class="n">elem</span> <span class="o">+</span> <span class="n">right</span> <span class="o">+</span> <span class="s">"}"</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>We can now create empty and non empty sets and play with them:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">t1</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">NonEmpty</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Empty</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Empty</span><span class="o">)</span>  <span class="c1">//&gt; t1  : NonEmpty = {.3.}</span>
+<span class="k">val</span> <span class="nv">t2</span> <span class="k">=</span> <span class="nv">t1</span><span class="o">.</span><span class="py">incl</span><span class="o">(</span><span class="mi">4</span><span class="o">)</span>                             <span class="c1">//&gt; res0: IntSet = {.3{.4.}}</span>
+</code></pre></div></div>
+
+<p>One important aspect here is that we are still purely functional, there is no mutation. When we use <code class="language-plaintext highlighter-rouge">incl</code> method to include a new element in a tree, we are actually creating a new tree that includes that element (and not modifying a previous existing tree).</p>
+
+<p>Both the type <code class="language-plaintext highlighter-rouge">Empty</code> and <code class="language-plaintext highlighter-rouge">NonEmpty</code> conform to the type <code class="language-plaintext highlighter-rouge">IntSet</code>, which means that any object of type <code class="language-plaintext highlighter-rouge">Empty</code> or <code class="language-plaintext highlighter-rouge">NonEmpty</code> can be used whenever an object of type <code class="language-plaintext highlighter-rouge">IntSet</code> is required. Scala implements dynamic method dispatch, which means that the code invoked by a method call depends on the runtime type of the object that contains the method.</p>
+
+<p>Any user-defined class extends another class (when no superclass is given, the standard java.lang.Object class is assumed).</p>
+
+<h2 id="object-definitions">Object definitions</h2>
+
+<p>In the previous example, all <code class="language-plaintext highlighter-rouge">Empty</code> objects will actually be equal. To avoid creating many different instances we should use a Singleton patern. In Scala we can do it in a very simple way, expressing <code class="language-plaintext highlighter-rouge">Empty</code> as an object instead of as a class:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Empty</span> <span class="k">extends</span> <span class="nc">IntSet</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">contains</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">false</span>
+  <span class="k">def</span> <span class="nf">incl</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">IntSet</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NonEmpty</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Empty</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Empty</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">toString</span> <span class="k">=</span> <span class="s">"."</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="classes-organization">Classes organization</h2>
+
+<p>In Scala, classes and objects can be organized using packages, similar to what happens in Java.</p>
+
+<p>To do that, we simply add a <code class="language-plaintext highlighter-rouge">package</code> sentence at the beginning of the file:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">week3</span>
+</code></pre></div></div>
+
+<p>After that, we can refer to entities in a package using either their fully qualified name or an <code class="language-plaintext highlighter-rouge">import</code> sentence. This <code class="language-plaintext highlighter-rouge">import</code> sentence come in several forms:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">week3.Class1</span>
+<span class="k">import</span> <span class="nn">week3.</span><span class="o">{</span><span class="nc">Class1</span><span class="o">,</span> <span class="nc">Object1</span><span class="o">}</span>
+<span class="k">import</span> <span class="nn">week3._</span>
+</code></pre></div></div>
+
+<p>The first form imports only one entity. The second, some. The last, all entities in that package.</p>
+
+<p>In any Scala program there are some entities that are always automatically imported:</p>
+
+<ul>
+  <li>all members of package <code class="language-plaintext highlighter-rouge">scala</code></li>
+  <li>all members of package <code class="language-plaintext highlighter-rouge">java.lang</code></li>
+  <li>all members of the singleton object <code class="language-plaintext highlighter-rouge">scala.Predef</code></li>
+</ul>
+
+<p>That’s why we can use <code class="language-plaintext highlighter-rouge">Int</code>, <code class="language-plaintext highlighter-rouge">Boolean</code>, <code class="language-plaintext highlighter-rouge">Object</code>, <code class="language-plaintext highlighter-rouge">require</code>, <code class="language-plaintext highlighter-rouge">assert</code> and so on. They all are types or functions included in this automatically imported entities.</p>
+
+<h2 id="traits">Traits</h2>
+
+<p>In Scala, as it happens in Java and in many object oriented languages, a class can only inherit from one superclass. If we want to kind of simulate inheritance from more than one superclass, however, we can use traits, as classes, objects and traits can inherit from at most one class but arbitrary many traits.</p>
+
+<p>Traits have some similarities with interfaces in Java, although they aren’t exactly the same. For instance, traits in Scala can contain fields and fully implemented methods.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Planar</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">height</span><span class="k">:</span> <span class="kt">Int</span>
+  <span class="k">def</span> <span class="nf">width</span><span class="k">:</span> <span class="kt">Int</span>
+  <span class="k">def</span> <span class="nf">surface</span> <span class="k">=</span> <span class="n">height</span> <span class="o">*</span> <span class="n">width</span>
+<span class="o">}</span>
+
+<span class="k">class</span> <span class="nc">Square</span> <span class="k">extends</span> <span class="nc">Shape</span> <span class="k">with</span> <span class="nc">Planar</span> <span class="k">with</span> <span class="nc">Movable</span> <span class="o">...</span>
+</code></pre></div></div>
+
+<h2 id="scalas-class-hierarchy">Scala’s class hierarchy</h2>
+
+<p><img src="/assets/funprog-week-3-data-abstraction.png" alt="Scala's class hierarchy" /></p>
+
+<p>At the top of the type hierarchy we find <code class="language-plaintext highlighter-rouge">Any</code>, <code class="language-plaintext highlighter-rouge">AnyRef</code> and <code class="language-plaintext highlighter-rouge">AnyVal</code>:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Any</code> is the one that gives us the methods <code class="language-plaintext highlighter-rouge">==</code>, <code class="language-plaintext highlighter-rouge">!=</code>, <code class="language-plaintext highlighter-rouge">equals</code>, <code class="language-plaintext highlighter-rouge">hashCode</code>, <code class="language-plaintext highlighter-rouge">toString</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">AnyRef</code> is just an alias for <code class="language-plaintext highlighter-rouge">java.lang.Object</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">AnyVal</code> is the base type of all primitive types (<code class="language-plaintext highlighter-rouge">Int</code>, <code class="language-plaintext highlighter-rouge">Boolean</code>, etc.).</li>
+</ul>
+
+<p>At the bottom of the type hierarchy we find <code class="language-plaintext highlighter-rouge">Nothing</code> and <code class="language-plaintext highlighter-rouge">Null</code>:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Nothing</code> is a subtype of every other type, but there is no value of type <code class="language-plaintext highlighter-rouge">Nothing</code>, it’s just useful to signal abnormal termination and as an element type of empty collections.</li>
+  <li><code class="language-plaintext highlighter-rouge">Null</code> is a subtype of every subclass of <code class="language-plaintext highlighter-rouge">AnyRef</code> type. It’s also the type of the <code class="language-plaintext highlighter-rouge">null</code> value. It’s incompatible with subtypes of <code class="language-plaintext highlighter-rouge">AnyVal</code>.</li>
+</ul>
+
+<p>For example, the expression <code class="language-plaintext highlighter-rouge">throw Exc</code> aborts evaluation raising an exception. The type of this expression is <code class="language-plaintext highlighter-rouge">Nothing</code>.</p>
+
+
+  </div><a class="u-url" href="/2013/02/08/funprog-week-3-data-abstraction.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>Email:</li>
+          <li>hello <span class="footer-almost-black">at</span> albertmata <span class="footer-almost-black">dot</span> net</li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/almata"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">almata</span></a></li><li><a href="https://www.linkedin.com/in/almata"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">almata</span></a></li><li><a href="https://www.twitter.com/almata"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">almata</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>
+          This website does not use any cookie and does not collect any data. Read <a href="/privacy/">Privacy</a> for more information.
+          Built with <a href="https://jekyllrb.com">Jekyll</a> and hosted on <a href="https://pages.github.com">GitHub Pages</a>.
+          Maintained with ♥ for the web.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

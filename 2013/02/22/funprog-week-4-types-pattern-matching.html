@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/assets/main.css">
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Albert Mata</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          <a class="page-link" href="/">Home</a><a class="page-link" href="/notes/">Notes</a><a class="page-link" href="/skills/">Skills</a><a class="page-link" href="/privacy/">Privacy</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">FunProg week 4: Types &amp; pattern matching</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2013-02-22T00:00:00+01:00" itemprop="datePublished">Feb 22, 2013
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><em>In September 2012, I enrolled in the course <a href="https://www.coursera.org/course/progfun">Functional Programming Principles in Scala</a> given by Martin Odersky at Coursera. In that course I learnt about functional programming and how it can be effectively combined with object-oriented programming. The series [FunProg week] are my compiled notes from that course.</em></p>
+
+<h2 id="type-parameters--generics">Type parameters &amp; Generics</h2>
+
+<p>Imagine we want to create a little class hierarchy to work with Cons-Lists in Scala.</p>
+
+<p>A Cons-List is a common data structure consisting in an immutable linked list constructed from two building blocks: <code class="language-plaintext highlighter-rouge">Nil</code> (the empty list) and <code class="language-plaintext highlighter-rouge">Cons</code> (a cell containing an element and the remainder of the list).</p>
+
+<p>In code, we can see it this way:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">IntList</span> <span class="o">...</span>
+<span class="k">class</span> <span class="nc">Nil</span> <span class="k">extends</span> <span class="nc">IntList</span> <span class="o">...</span>
+<span class="k">class</span> <span class="nc">Cons</span><span class="o">(</span><span class="k">val</span> <span class="nv">head</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="k">val</span> <span class="nv">tail</span><span class="k">:</span> <span class="kt">IntList</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">IntList</span> <span class="o">...</span>
+</code></pre></div></div>
+
+<p>Please note the special syntax <code class="language-plaintext highlighter-rouge">val head: Int</code> in the definition of <code class="language-plaintext highlighter-rouge">Cons</code>. It defines at the same time a parameter and a field of a class.</p>
+
+<p>But this class hierarchy is only valid to work with Cons-Lists of <code class="language-plaintext highlighter-rouge">Int</code> elements. We would need a different one for any type. To avoid that, we use type parameters:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="err">...</span>
+<span class="nc">class</span> <span class="nc">Nil</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">extends</span> <span class="nc">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">...</span>
+<span class="k">class</span> <span class="nc">Cons</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="k">val</span> <span class="nv">head</span><span class="k">:</span> <span class="kt">T</span><span class="o">,</span> <span class="k">val</span> <span class="nv">tail</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span> <span class="k">extends</span> <span class="nc">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">...</span>
+</code></pre></div></div>
+
+<p>This is the complete implementation of our Cons-List using type parameters:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">isEmpty</span><span class="k">:</span> <span class="kt">Boolean</span>
+  <span class="k">def</span> <span class="nf">head</span><span class="k">:</span> <span class="kt">T</span>
+  <span class="k">def</span> <span class="nf">tail</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span>
+<span class="o">}</span>
+
+<span class="k">class</span> <span class="nc">Cons</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="k">val</span> <span class="nv">head</span><span class="k">:</span> <span class="kt">T</span><span class="o">,</span> <span class="k">val</span> <span class="nv">tail</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span> <span class="k">extends</span> <span class="nc">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">isEmpty</span> <span class="k">=</span> <span class="kc">false</span>
+<span class="o">}</span>
+
+<span class="k">class</span> <span class="nc">Nil</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="nc">extends</span> <span class="nc">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">isEmpty</span> <span class="k">=</span> <span class="kc">true</span>
+  <span class="k">def</span> <span class="nf">head</span><span class="k">:</span> <span class="kt">Nothing</span> <span class="o">=</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">NoSuchElementException</span><span class="o">(</span><span class="s">"Nil.head"</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">tail</span><span class="k">:</span> <span class="kt">Nothing</span> <span class="o">=</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">NoSuchElementException</span><span class="o">(</span><span class="s">"Nil.tail"</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Functions can also have type parameters. For instance, this is a function that creates a list consisting of a single element:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">singleton</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">elem</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Cons</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">elem</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Nil</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span>
+</code></pre></div></div>
+
+<p>Which we can use now this way:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">singleton</span><span class="o">[</span><span class="kt">Int</span><span class="o">](</span><span class="mi">1</span><span class="o">)</span>
+<span class="n">singleton</span><span class="o">[</span><span class="kt">Boolean</span><span class="o">](</span><span class="kc">true</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>But as long as the Scala compiler is usually able to deduce the correct type parameter from the value arguments, we often can left it out and just write:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">singleton</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+<span class="nf">singleton</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>In Scala, like in Java or Haskell,  type erasure is used. That means that type parameters and type arguments are removed before evaluating the program. So the types are only important for the compiler. This is different from C++, C# or F#, that keep the type parameters around at run time.</p>
+
+<h2 id="polymorphism">Polymorphism</h2>
+
+<p>Polymorphism means that a function type comes in many forms. In programming it means that the function can be applied to arguments of many types, or the type can have instances of many types.</p>
+
+<p>We have seen two principal forms of polymorphism: subtyping and generics. Using subtyping, instances of a subclass can be passed to a base class. Using generics, instances of a function or class are created by type parameterization.</p>
+
+<h2 id="example-nat--peano-numbers">Example: Nat / Peano numbers</h2>
+
+<p>Let’s play a little bit with objects in Scala with an example based on the <a href="http://en.wikipedia.org/wiki/Peano_axioms">Peano axioms</a>.</p>
+
+<p>Peano numbers are a simple way of representing the natural numbers using only a zero value and a successor function. Only with that, we can provide an implementation of the abstract class Nat that represents non-negative integers (and of course doesn’t use the standard primitive classes):</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">abstract</span> <span class="k">class</span> <span class="nc">Nat</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">isZero</span><span class="k">:</span> <span class="kt">Boolean</span>
+  <span class="k">def</span> <span class="nf">predecessor</span><span class="k">:</span> <span class="kt">Nat</span>
+  <span class="k">def</span> <span class="nf">successor</span><span class="k">:</span> <span class="kt">Nat</span>
+  <span class="k">def</span> <span class="nf">+</span> <span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">Nat</span><span class="o">)</span><span class="k">:</span> <span class="kt">Nat</span>
+  <span class="k">def</span> <span class="nf">-</span> <span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">Nat</span><span class="o">)</span><span class="k">:</span> <span class="kt">Nat</span>
+<span class="o">}</span>
+
+<span class="c1">// Sub-object for number zero</span>
+<span class="k">object</span> <span class="nc">Zero</span> <span class="k">extends</span> <span class="nc">Nat</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">isZero</span> <span class="k">=</span> <span class="kc">true</span>
+  <span class="k">def</span> <span class="nf">predecessor</span> <span class="k">=</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">Error</span><span class="o">(</span><span class="s">"0.predecessor"</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">successor</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Succ</span><span class="o">(</span><span class="k">this</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">+</span> <span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">Nat</span><span class="o">)</span> <span class="k">=</span> <span class="n">that</span>
+  <span class="k">def</span> <span class="nf">-</span> <span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">Nat</span><span class="o">)</span> <span class="k">=</span> <span class="nf">if</span> <span class="o">(</span><span class="nv">that</span><span class="o">.</span><span class="py">isZero</span><span class="o">)</span> <span class="k">this</span> <span class="k">else</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">Error</span><span class="o">(</span><span class="s">"0 - number"</span><span class="o">)</span>
+<span class="o">}</span>
+
+<span class="c1">// Sub-class for strictly positive numbers</span>
+<span class="k">class</span> <span class="nc">Succ</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Nat</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Nat</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">isZero</span> <span class="k">=</span> <span class="kc">false</span>
+  <span class="k">def</span> <span class="nf">predecessor</span> <span class="k">=</span> <span class="n">n</span>
+  <span class="k">def</span> <span class="nf">successor</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Succ</span><span class="o">(</span><span class="k">this</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">+</span> <span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">Nat</span><span class="o">)</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Succ</span><span class="o">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">that</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">-</span> <span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">Nat</span><span class="o">)</span> <span class="k">=</span> <span class="nf">if</span> <span class="o">(</span><span class="nv">that</span><span class="o">.</span><span class="py">isZero</span><span class="o">)</span> <span class="k">this</span> <span class="k">else</span> <span class="n">n</span> <span class="o">-</span> <span class="nv">that</span><span class="o">.</span><span class="py">predecessor</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>As we can see, for both <code class="language-plaintext highlighter-rouge">Zero</code> and <code class="language-plaintext highlighter-rouge">Succ</code> class, the implementation of the <code class="language-plaintext highlighter-rouge">successor</code> method is actually the same. So we could (and should) refactor it moving that definition to the abstract class <code class="language-plaintext highlighter-rouge">Nat</code>.</p>
+
+<h2 id="functions-as-objects">Functions as objects</h2>
+
+<p>Functions are actually treated as objects in Scala. For example, the function type <code class="language-plaintext highlighter-rouge">A =&gt; B</code> (a function that takes a type <code class="language-plaintext highlighter-rouge">A</code> and returns a type <code class="language-plaintext highlighter-rouge">B</code>) is just an abbreviation for this class:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">scala</span>
+<span class="k">trait</span> <span class="nc">Function1</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">B</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">A</span><span class="o">)</span><span class="k">:</span> <span class="kt">B</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>So we can see that functions are actually objects with apply methods. There are also traits <code class="language-plaintext highlighter-rouge">Function2</code>, <code class="language-plaintext highlighter-rouge">Function3</code> and so on (up to 22 parameters).</p>
+
+<p>And when we have an anonymous function as <code class="language-plaintext highlighter-rouge">(x: Int) =&gt; x * x</code> it’s actually an abbreviation for this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span> <span class="k">class</span> <span class="nc">AnonFun</span> <span class="k">extends</span> <span class="nc">Function1</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Int</span><span class="o">]</span> <span class="o">{</span>
+	<span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+  <span class="o">}</span>
+  <span class="k">new</span> <span class="nc">AnonFun</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Taking this into account, in our previously defined <code class="language-plaintext highlighter-rouge">List</code> class we can define some functions that allow us to create lists using the form <code class="language-plaintext highlighter-rouge">List(1, 2)</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">List</span> <span class="o">{</span>
+  <span class="c1">// List() = List.apply()</span>
+  <span class="k">def</span> <span class="nf">apply</span><span class="o">[</span><span class="kt">T</span><span class="o">]()</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Nil</span>
+  <span class="c1">// List(1) = List.apply(1)</span>
+  <span class="k">def</span> <span class="nf">apply</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">x1</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Cons</span><span class="o">(</span><span class="n">x1</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Nil</span><span class="o">)</span>
+  <span class="c1">// List(1, 2) = List.apply(1, 2)</span>
+  <span class="k">def</span> <span class="nf">apply</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">x1</span><span class="k">:</span> <span class="kt">T</span><span class="o">,</span> <span class="n">x2</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Cons</span><span class="o">(</span><span class="n">x1</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Cons</span><span class="o">(</span><span class="n">x2</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Nil</span><span class="o">))</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="subtyping-and-generics">Subtyping and generics</h2>
+
+<p>When we work with subtypes and generics, we have to consider two important concepts: type bounds and variance.</p>
+
+<p>Type bounds help us to to be more concrete with the types involved in a function. Let’s imagine a class hierarchy with an abstract superclass <code class="language-plaintext highlighter-rouge">A</code> and two concrete subclasses <code class="language-plaintext highlighter-rouge">B</code> and <code class="language-plaintext highlighter-rouge">C</code>. We then could have a function like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">myFunction</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">A</span><span class="o">)</span><span class="k">:</span> <span class="kt">A</span>
+</code></pre></div></div>
+
+<p>We will be passing objects of type <code class="language-plaintext highlighter-rouge">B</code> and <code class="language-plaintext highlighter-rouge">C</code> to the function, and maybe getting the same types as a result, but we are just expressing that all involved objects will be of type <code class="language-plaintext highlighter-rouge">A</code>.</p>
+
+<p>Using type bounds we can be more concrete:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">myFunction</span><span class="o">[</span><span class="kt">S</span> <span class="k">&lt;:</span> <span class="kt">A</span><span class="o">](</span><span class="n">x</span><span class="k">:</span> <span class="kt">S</span><span class="o">)</span><span class="k">:</span> <span class="kt">S</span>
+</code></pre></div></div>
+
+<p>The part <code class="language-plaintext highlighter-rouge">[S &lt;: A]</code> expresses an upper bound for the type parameter <code class="language-plaintext highlighter-rouge">S</code>. It means that <code class="language-plaintext highlighter-rouge">S</code> can be instantiated only to types that conform to <code class="language-plaintext highlighter-rouge">A</code>. This way we have more information about the types going around in this function.</p>
+
+<p>Generally, the notation <code class="language-plaintext highlighter-rouge">S &lt;: T</code> means that <code class="language-plaintext highlighter-rouge">S</code> is a subtype of <code class="language-plaintext highlighter-rouge">T</code>, while <code class="language-plaintext highlighter-rouge">S &gt;: T</code> means that <code class="language-plaintext highlighter-rouge">S</code> is a supertype of <code class="language-plaintext highlighter-rouge">T</code>.</p>
+
+<p>It’s actually possible to mix an upper and a lower bound simultaneously. For instance this would restrict <code class="language-plaintext highlighter-rouge">S</code> any type on the interval between <code class="language-plaintext highlighter-rouge">T</code> and <code class="language-plaintext highlighter-rouge">Z</code> in any given class hierarchy:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="kt">S</span> <span class="k">&gt;:</span> <span class="kt">T</span> <span class="k">&lt;:</span> <span class="kt">Z</span><span class="o">]</span>
+</code></pre></div></div>
+
+<h2 id="variance">Variance</h2>
+
+<p>Variance is totally related with generics. We’ve seen that we can create lists using this form:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">List</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span>
+</code></pre></div></div>
+
+<p>And in previous paragraphs we’ve imagined a class hierarchy where <code class="language-plaintext highlighter-rouge">B</code> is a subtype of <code class="language-plaintext highlighter-rouge">A</code>.</p>
+
+<p>In general, we know that the standard definition says that “if <code class="language-plaintext highlighter-rouge">A &lt;: B</code>, then everything one can do with a value of type <code class="language-plaintext highlighter-rouge">B</code> one should also be able to do with a value of type <code class="language-plaintext highlighter-rouge">A</code>”.</p>
+
+<p>Can we then say that <code class="language-plaintext highlighter-rouge">List[B]</code> is actually a subtype of <code class="language-plaintext highlighter-rouge">List[A]</code>?</p>
+
+<p>Well, not always. We call types for which this relationship holds covariant, because their subtyping relationship varies with the type parameter. In our example, <code class="language-plaintext highlighter-rouge">List</code> is covariant, meaning that <code class="language-plaintext highlighter-rouge">List[B]</code> really is a subtype of <code class="language-plaintext highlighter-rouge">List[A]</code>.</p>
+
+<p>But sometimes, covariance can cause problems, so there are some types that are not covariant (for instance, <code class="language-plaintext highlighter-rouge">Array</code>).</p>
+
+<p>Roughly speaking, a type that accepts mutations of its elements should not be covariant. On the other hand, immutable types can be covariant if some conditions on methods are met.</p>
+
+<p>If <code class="language-plaintext highlighter-rouge">B</code> is a subtype of <code class="language-plaintext highlighter-rouge">A</code>:</p>
+<ul>
+  <li>if <code class="language-plaintext highlighter-rouge">C[B] &lt;: C[A]</code> then <code class="language-plaintext highlighter-rouge">C</code> is covariant,</li>
+  <li>if <code class="language-plaintext highlighter-rouge">C[B] &gt;: C[A]</code> then <code class="language-plaintext highlighter-rouge">C</code> is contravariant,</li>
+  <li>if neither <code class="language-plaintext highlighter-rouge">C[A]</code> nor <code class="language-plaintext highlighter-rouge">C[B]</code> is a subtype of the other, <code class="language-plaintext highlighter-rouge">C</code> is nonvariant.</li>
+</ul>
+
+<p>Scale lets us declare the variance of a type by annotating the type parameter:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">C</span><span class="o">[</span><span class="kt">+T</span><span class="o">]</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// C is covariant</span>
+<span class="k">class</span> <span class="nc">C</span><span class="o">[</span><span class="kt">-T</span><span class="o">]</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// C is contravariant</span>
+<span class="k">class</span> <span class="nc">C</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// C is nonvariant</span>
+</code></pre></div></div>
+
+<p>But the Scala compiler will check that there are no problematic combinations when compiling a class with variance annotations. Roughly:</p>
+
+<ul>
+  <li>covariant type parameters can only appear in method results,</li>
+  <li>contravariant type parameters can only appear in method parameters,</li>
+  <li>invariant/nonvariant type parameters can appear anywhere.</li>
+</ul>
+
+<p>So functions are contravariant in their argument type(s) and covariant in their result type.</p>
+
+<h2 id="object-oriented-decomposition">Object oriented decomposition</h2>
+
+<p>Imagine we want to write an interpreter for arithmetic expressions. These expressions will be only numbers and additions and will be represented with a hierarchy with <code class="language-plaintext highlighter-rouge">Expr</code> as superclass and <code class="language-plaintext highlighter-rouge">Number</code> and <code class="language-plaintext highlighter-rouge">Sum</code> as its subclasses.</p>
+
+<p>This could be an implementation of this hierarchy (in the code <code class="language-plaintext highlighter-rouge">Expr</code> will be shown as <code class="language-plaintext highlighter-rouge">ExprN</code> to work easily with different versions):</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Expr1</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">isNumber</span><span class="k">:</span> <span class="kt">Boolean</span>  <span class="c1">// classification</span>
+  <span class="k">def</span> <span class="nf">isSum</span><span class="k">:</span> <span class="kt">Boolean</span>     <span class="c1">// classification</span>
+  <span class="k">def</span> <span class="nf">numValue</span><span class="k">:</span> <span class="kt">Int</span>      <span class="c1">// accessor</span>
+  <span class="k">def</span> <span class="nf">leftOp</span><span class="k">:</span> <span class="kt">Expr1</span>      <span class="c1">// accessor</span>
+  <span class="k">def</span> <span class="nf">rightOp</span><span class="k">:</span> <span class="kt">Expr1</span>     <span class="c1">// accessor</span>
+<span class="o">}</span>
+
+<span class="k">class</span> <span class="nc">Number1</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr1</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">isNumber</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">true</span>
+  <span class="k">def</span> <span class="nf">isSum</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">false</span>
+  <span class="k">def</span> <span class="nf">numValue</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">n</span>
+  <span class="k">def</span> <span class="nf">leftOp</span><span class="k">:</span> <span class="kt">Expr1</span> <span class="o">=</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">Error</span><span class="o">(</span><span class="s">"Number.leftOp"</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">rightOp</span><span class="k">:</span> <span class="kt">Expr1</span> <span class="o">=</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">Error</span><span class="o">(</span><span class="s">"Number.rightOp"</span><span class="o">)</span>
+<span class="o">}</span>
+
+<span class="k">class</span> <span class="nc">Sum1</span><span class="o">(</span><span class="n">e1</span><span class="k">:</span> <span class="kt">Expr1</span><span class="o">,</span> <span class="n">e2</span><span class="k">:</span> <span class="kt">Expr1</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr1</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">isNumber</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">false</span>
+  <span class="k">def</span> <span class="nf">isSum</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">true</span>
+  <span class="k">def</span> <span class="nf">numValue</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">Error</span><span class="o">(</span><span class="s">"Sum.numValue"</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">leftOp</span><span class="k">:</span> <span class="kt">Expr1</span> <span class="o">=</span> <span class="n">e1</span>
+  <span class="k">def</span> <span class="nf">rightOp</span><span class="k">:</span> <span class="kt">Expr1</span> <span class="o">=</span> <span class="n">e2</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>And now we could write an evaluation function as follows:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">eval</span><span class="o">(</span><span class="n">e</span><span class="k">:</span> <span class="kt">Expr1</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
+  <span class="nf">if</span> <span class="o">(</span><span class="nv">e</span><span class="o">.</span><span class="py">isNumber</span><span class="o">)</span> <span class="nv">e</span><span class="o">.</span><span class="py">numValue</span>
+  <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="nv">e</span><span class="o">.</span><span class="py">isSum</span><span class="o">)</span> <span class="nf">eval</span><span class="o">(</span><span class="nv">e</span><span class="o">.</span><span class="py">leftOp</span><span class="o">)</span> <span class="o">+</span> <span class="nf">eval</span> <span class="o">(</span><span class="nv">e</span><span class="o">.</span><span class="py">rightOp</span><span class="o">)</span>
+  <span class="k">else</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">Error</span><span class="o">(</span><span class="s">"Unknown expression "</span> <span class="o">+</span> <span class="n">e</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Imagine now that we want to add two new subclasses of <code class="language-plaintext highlighter-rouge">Expr</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Prod</span><span class="o">(</span><span class="n">e1</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">,</span> <span class="n">e2</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr</span> <span class="c1">// e1 * e2</span>
+<span class="k">class</span> <span class="nc">Var</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr</span>           <span class="c1">// variable 'x'</span>
+</code></pre></div></div>
+
+<p>We would be forced to add new classification methods (<code class="language-plaintext highlighter-rouge">isProduct</code> and <code class="language-plaintext highlighter-rouge">isVar</code>) in all the classes and a new accessor (<code class="language-plaintext highlighter-rouge">name</code>) also in all the classes, throwing exceptions where they make no sense. So, creating more subclasses would force us to add new methods to preexisting classes and end up with a huge amount of methods. This is clearly non scalable.</p>
+
+<p>One possible solution to this problem would be to use type tests and casts to create an evaluation function this way:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">eval</span><span class="o">(</span><span class="n">e</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
+  <span class="nf">if</span> <span class="o">(</span><span class="nv">e</span><span class="o">.</span><span class="py">isInstanceOf</span><span class="o">[</span><span class="kt">Number</span><span class="o">])</span> <span class="nv">e</span><span class="o">.</span><span class="py">asInstanceOf</span><span class="o">[</span><span class="kt">Number</span><span class="o">].</span><span class="py">numValue</span>
+  <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="nv">e</span><span class="o">.</span><span class="py">isInstanceOf</span><span class="o">[</span><span class="kt">Sum</span><span class="o">])</span> <span class="nf">eval</span><span class="o">(</span><span class="nv">e</span><span class="o">.</span><span class="py">asInstanceOf</span><span class="o">[</span><span class="kt">Sum</span><span class="o">].</span><span class="py">leftOp</span><span class="o">)</span> <span class="o">+</span> <span class="nf">eval</span><span class="o">(</span><span class="nv">e</span><span class="o">.</span><span class="py">asInstanceOf</span><span class="o">[</span><span class="kt">Sum</span><span class="o">].</span><span class="py">rightOp</span><span class="o">)</span>
+  <span class="k">else</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">Error</span><span class="o">(</span><span class="s">"Unknown expression "</span> <span class="o">+</span> <span class="n">e</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>That would allow us to remove all the classification methods in all classes and implement the access methods only when they make sense. But this is a low-level and potentially unsafe solution. So we actually need a better approach.</p>
+
+<p>A first valid solution is to use object oriented decomposition. Instead of creating an external eval function, we add it as a method inside our hierarchy:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Expr2</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">eval</span><span class="k">:</span> <span class="kt">Int</span>
+<span class="o">}</span>
+
+<span class="k">class</span> <span class="nc">Number2</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr2</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">eval</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">n</span>
+<span class="o">}</span>
+
+<span class="k">class</span> <span class="nc">Sum2</span><span class="o">(</span><span class="n">e1</span><span class="k">:</span> <span class="kt">Expr2</span><span class="o">,</span> <span class="n">e2</span><span class="k">:</span> <span class="kt">Expr2</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr2</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">eval</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">e1</span><span class="o">.</span><span class="py">eval</span> <span class="o">+</span> <span class="nv">e2</span><span class="o">.</span><span class="py">eval</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This works pretty fine but, again, we’ll have to define new methods in all the subclasses if we’d like to not only evaluate expressions (<code class="language-plaintext highlighter-rouge">eval</code>) but also display them (<code class="language-plaintext highlighter-rouge">show</code>). And if we’d have a <code class="language-plaintext highlighter-rouge">Prod</code> class and we want to create a function that works together with <code class="language-plaintext highlighter-rouge">Sum</code> and <code class="language-plaintext highlighter-rouge">Prod</code> elements (i.e. <code class="language-plaintext highlighter-rouge">simplify</code>) we can’t get it with methods inside those classes.</p>
+
+<p>So, in some cases we’ll need a different type of solution, one based on pattern matching.</p>
+
+<h2 id="pattern-matching">Pattern matching</h2>
+
+<p>Pattern matching is a generalization of <code class="language-plaintext highlighter-rouge">switch</code> from C/Java to class hierarchies. In Scala it’s expressed using the keyword <code class="language-plaintext highlighter-rouge">match</code>.</p>
+
+<p>We use it when functions contain very complicated or nested switch statements. In this case, we can split the function definition into multiple ones, and put patterns in place of some arguments. When the function is called, the compiler compares the arguments with the definitions at runtime, and picks the correct one (the most specific definition available).</p>
+
+<p>An important benefit of pattern matching is that if we need to add or modify conditions, we don’t need to go into one huge function, but only add or modify appropriate definitions.</p>
+
+<p>So, in our <code class="language-plaintext highlighter-rouge">Expr</code> example we want functions to <code class="language-plaintext highlighter-rouge">eval</code>, <code class="language-plaintext highlighter-rouge">show</code> and <code class="language-plaintext highlighter-rouge">simplify</code> (but maybe in the future will be more, so it has to be easily scalable).</p>
+
+<p>We achieve it using pattern matching. And for it, we need case classes. A case class definition is similar to a normal class definition, except that it’s preceded by the modifier <code class="language-plaintext highlighter-rouge">case</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Expr3</span>
+
+<span class="k">case</span> <span class="k">class</span> <span class="nc">Number3</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr3</span>
+
+<span class="k">case</span> <span class="k">class</span> <span class="nc">Sum3</span><span class="o">(</span><span class="n">e1</span><span class="k">:</span> <span class="kt">Expr3</span><span class="o">,</span> <span class="n">e2</span><span class="k">:</span> <span class="kt">Expr3</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr3</span>
+</code></pre></div></div>
+
+<p>This implicitly defines companion objects with <code class="language-plaintext highlighter-rouge">apply</code> methods, so we can automatically write <code class="language-plaintext highlighter-rouge">Number3(1)</code> instead of <code class="language-plaintext highlighter-rouge">new Number3(1)</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Number3</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Number3</span><span class="o">(</span><span class="n">n</span><span class="o">)</span>
+<span class="o">}</span>
+
+<span class="k">object</span> <span class="nc">Sum3</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">e1</span><span class="k">:</span> <span class="kt">Expr3</span><span class="o">,</span> <span class="n">e2</span><span class="k">:</span> <span class="kt">Expr3</span><span class="o">)</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Sum3</span><span class="o">(</span><span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>How do we access the members in each class if we don’t have any accessor? This way:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">eval</span><span class="o">(</span><span class="n">e</span><span class="k">:</span> <span class="kt">Expr3</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">e</span> <span class="k">match</span> <span class="o">{</span>
+  <span class="k">case</span> <span class="nc">Number3</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">n</span>
+  <span class="k">case</span> <span class="nc">Sum3</span><span class="o">(</span><span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nf">eval</span><span class="o">(</span><span class="n">e1</span><span class="o">)</span> <span class="o">+</span> <span class="nf">eval</span><span class="o">(</span><span class="n">e2</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Or defining the evaluation function as a method of the base <code class="language-plaintext highlighter-rouge">trait</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Expr3</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">eval</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">this</span> <span class="k">match</span> <span class="o">{</span>
+	<span class="k">case</span> <span class="nc">Number3</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">n</span>
+	<span class="k">case</span> <span class="nc">Sum3</span><span class="o">(</span><span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nv">e1</span><span class="o">.</span><span class="py">eval</span> <span class="o">+</span> <span class="nv">e2</span><span class="o">.</span><span class="py">eval</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The part after the <code class="language-plaintext highlighter-rouge">case</code> is called the pattern. If no pattern matches the value of the selector, a <code class="language-plaintext highlighter-rouge">MatchError</code> exception is thrown.</p>
+
+<p>So, when to choose between object oriented and pattern matching? As a general rule, if we are going to frequently add new subclasses to our hierarchy, the object oriented decomposition approach will be better. On the other hand, if our hierarchy is going to be quite stable but we are often going to add new methods, the pattern matching option is easier.</p>
+
+
+  </div><a class="u-url" href="/2013/02/22/funprog-week-4-types-pattern-matching.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>Email:</li>
+          <li>hello <span class="footer-almost-black">at</span> albertmata <span class="footer-almost-black">dot</span> net</li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/almata"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">almata</span></a></li><li><a href="https://www.linkedin.com/in/almata"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">almata</span></a></li><li><a href="https://www.twitter.com/almata"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">almata</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>
+          This website does not use any cookie and does not collect any data. Read <a href="/privacy/">Privacy</a> for more information.
+          Built with <a href="https://jekyllrb.com">Jekyll</a> and hosted on <a href="https://pages.github.com">GitHub Pages</a>.
+          Maintained with ♥ for the web.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

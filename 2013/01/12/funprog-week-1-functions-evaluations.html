@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/assets/main.css">
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Albert Mata</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          <a class="page-link" href="/">Home</a><a class="page-link" href="/notes/">Notes</a><a class="page-link" href="/skills/">Skills</a><a class="page-link" href="/privacy/">Privacy</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">FunProg week 1: Functions &amp; evaluations</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2013-01-12T00:00:00+01:00" itemprop="datePublished">Jan 12, 2013
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><em>In September 2012, I enrolled in the course <a href="https://www.coursera.org/course/progfun">Functional Programming Principles in Scala</a> given by Martin Odersky at Coursera. In that course I learnt about functional programming and how it can be effectively combined with object-oriented programming. The series [FunProg week] are my compiled notes from that course.</em></p>
+
+<h2 id="programming-paradigms">Programming Paradigms</h2>
+
+<p>In general terms, we can distinguish three different programming paradigms:</p>
+
+<ul>
+  <li>imperative programming (i.e. C, Java)</li>
+  <li>functional programming (i.e. Scala or Haskell)</li>
+  <li>logic programming (i.e. Prolog)</li>
+</ul>
+
+<p>In imperative programming, we are used to modify mutable variables, use assignments and use control structures as if-then-else, loops, break, continue and return. In functional programming, nonetheless, we avoid mutations and totally concentrate on functions, which is why we say that in functional programming languages functions are first-class citizens. That means, for instance, that functions can be defined anywhere, including inside other functions, and that they can be passed to other functions as parameters or returned as results.</p>
+
+<p>One of the important benefits of functional programming is that it’s specially good for exploiting parallelism and concurrency for multicore and cloud computing.</p>
+
+<h2 id="evaluation-of-expressions-call-by-value-and-call-by-name">Evaluation of expressions: call-by-value and call-by-name</h2>
+
+<p>For the first steps using Scala, we use a REPL (Read–Eval–Print–Loop) tool which allows us to write some code and expressions and immediately get the result. There are some console tools available, but we can also use an Eclipse Scala Worksheet.</p>
+
+<p>The evaluation process is done as usual: firstly, the leftmost operator is taken (subject to the rules of operators precedence); secondly, its operands are evaluated (left before right); finally, the operator is applied to the operands. Any name is evaluated by replacing it with the right hand side of its definition:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">pi</span> <span class="k">=</span> <span class="mf">3.1415</span>
+<span class="n">pi</span> <span class="o">+</span> <span class="mi">3</span> <span class="c1">// pi will be evaluated to 3.1415</span>
+</code></pre></div></div>
+
+<p>Please note expressions in Scala may finish or not with a semi-colon (<code class="language-plaintext highlighter-rouge">;</code>). So, every line shows a different expression unless the <code class="language-plaintext highlighter-rouge">+</code> operator is used at the end of a line, which specifies that the expression continues on the next line.</p>
+
+<p>But definitions can have parameters:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">square</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+<span class="nf">square</span><span class="o">(</span><span class="mi">4</span><span class="o">)</span> <span class="c1">// will be evaluated to 4 * 4</span>
+</code></pre></div></div>
+
+<p>And we can also specify the returned type:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">square</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+</code></pre></div></div>
+
+<p>Actually with <code class="language-plaintext highlighter-rouge">def</code> we are defining our functions. And in these functions the same evaluation process applies: firstly, arguments are evaluated from left to right; secondly, the function definition applies to the arguments. It’s important to note that this evaluation process in some cases may not reduce to a value, for instance this function does not:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">loop</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">loop</span>
+</code></pre></div></div>
+
+<p>But this is just one way an expression can be evaluated (call-by-value). There is another one called call-by-name. They both reduce to the same final values as long as the reduced expression consists of pure functions and both evaluations terminate, but it’s possible that that doesn’t happen. Let’s see how they both work with an example:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Note this function doesn't use the second parameter</span>
+<span class="k">def</span> <span class="nf">test</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+</code></pre></div></div>
+
+<p>If we use call-by-value we first have to evaluate the arguments, while if we use call-by-name we first apply the function definition:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Using call-by-value</span>
+<span class="nf">test</span><span class="o">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="o">,</span> <span class="mi">2</span><span class="o">*</span><span class="mi">4</span><span class="o">)</span>
+<span class="nf">test</span><span class="o">(</span><span class="mi">7</span><span class="o">,</span> <span class="mi">2</span><span class="o">*</span><span class="mi">4</span><span class="o">)</span>
+<span class="nf">test</span><span class="o">(</span><span class="mi">7</span><span class="o">,</span> <span class="mi">8</span><span class="o">)</span>
+<span class="mi">7</span> <span class="o">*</span> <span class="mi">7</span>
+<span class="mi">49</span>
+
+<span class="c1">// Using call-by-name</span>
+<span class="nf">test</span><span class="o">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="o">,</span> <span class="mi">2</span><span class="o">*</span><span class="mi">4</span><span class="o">)</span>
+<span class="o">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="o">)</span> <span class="o">*</span> <span class="o">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="o">)</span>
+<span class="mi">7</span> <span class="o">*</span> <span class="o">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="o">)</span>
+<span class="mi">7</span> <span class="o">*</span> <span class="mi">7</span>
+<span class="mi">49</span>
+</code></pre></div></div>
+
+<p>In this example they both reduce to the same value and in the same number of steps, but it could be very different:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Using call-by-value</span>
+<span class="nf">test</span><span class="o">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="o">,</span> <span class="n">loop</span><span class="o">)</span>
+<span class="nf">test</span><span class="o">(</span><span class="mi">7</span><span class="o">,</span> <span class="n">loop</span><span class="o">)</span>
+<span class="nf">test</span><span class="o">(</span><span class="mi">7</span><span class="o">,</span> <span class="n">loop</span><span class="o">)</span>
+<span class="o">...</span>
+<span class="nf">test</span><span class="o">(</span><span class="mi">7</span><span class="o">,</span> <span class="n">loop</span><span class="o">)</span> <span class="c1">// it'd never end!</span>
+
+<span class="c1">// Using call-by-name</span>
+<span class="nf">test</span><span class="o">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="o">,</span> <span class="n">loop</span><span class="o">)</span>
+<span class="o">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="o">)</span> <span class="o">*</span> <span class="o">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="o">)</span>
+<span class="mi">7</span> <span class="o">*</span> <span class="o">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="o">)</span>
+<span class="mi">7</span> <span class="o">*</span> <span class="mi">7</span>
+<span class="mi">49</span>
+</code></pre></div></div>
+
+<p>So, if a CBV evaluation of an expression terminates, then CBN evaluation will always terminate too. But that’s not necessarily true in the other direction.</p>
+
+<p>In Scala the default is call-by-value, even when it’s less guaranted that it will terminate (the reason for that is because CBV is very often more efficient). But we can force Scala to use call-by-name. To do so, we specify the type of a function parameter starting with <code class="language-plaintext highlighter-rouge">=&gt;</code> (arrow):</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Note this function doesn't use the second parameter</span>
+<span class="k">def</span> <span class="nf">test</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+</code></pre></div></div>
+
+<p>And now the evaluation for the previous example is as follows:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">test</span><span class="o">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="o">,</span> <span class="n">loop</span><span class="o">)</span>
+<span class="c1">// First parameter is called by value</span>
+<span class="nf">test</span><span class="o">(</span><span class="mi">7</span><span class="o">,</span> <span class="n">loop</span><span class="o">)</span>
+<span class="c1">// Second parameter is called by name, so it's not reduced</span>
+<span class="c1">// There aren't any parameters left, so we can call the function now</span>
+<span class="mi">7</span> <span class="o">*</span> <span class="mi">7</span>
+<span class="mi">49</span>
+</code></pre></div></div>
+
+<h2 id="conditional-expressions">Conditional expressions</h2>
+
+<p>We have conditional expressions if-else in Scala, but it’s important to note that they are used for expressions, not for statements. So an if-else expression in Scala always returns an expression:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">abs</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="nf">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="k">else</span> <span class="o">-</span><span class="n">x</span>
+</code></pre></div></div>
+
+<p>The part <code class="language-plaintext highlighter-rouge">x &gt;= 0</code> is called a predicate and needs to be of type <code class="language-plaintext highlighter-rouge">Boolean</code>. It can use the standard operators <code class="language-plaintext highlighter-rouge">!</code>, <code class="language-plaintext highlighter-rouge">&amp;&amp;</code>, <code class="language-plaintext highlighter-rouge">||</code>, <code class="language-plaintext highlighter-rouge">&lt;=</code>, <code class="language-plaintext highlighter-rouge">==</code>, <code class="language-plaintext highlighter-rouge">!=</code>, etc.</p>
+
+<h2 id="def-vs-val">def vs val</h2>
+
+<p>Both <code class="language-plaintext highlighter-rouge">def</code> and <code class="language-plaintext highlighter-rouge">val</code> are used to set definitions. But while <code class="language-plaintext highlighter-rouge">def</code> makes the right hand side be evaluated on each use, <code class="language-plaintext highlighter-rouge">val</code> only evaluates once, at the point of the definition itself. Let’s see that with an example:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="mi">2</span> <span class="c1">// x will always be 2</span>
+<span class="k">def</span> <span class="nf">y</span> <span class="k">=</span> <span class="nf">square</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">z</span> <span class="k">=</span> <span class="nf">square</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="c1">// z will always be 4</span>
+</code></pre></div></div>
+
+<p>From now on, every time we use <code class="language-plaintext highlighter-rouge">y</code> it will evaluate <code class="language-plaintext highlighter-rouge">square(x)</code> to get a value. On the other side, every time we use <code class="language-plaintext highlighter-rouge">z</code> it will directly refer to 4, without evaluating anything.</p>
+
+<p>In functional programming we don’t use variables the same way we do in imperative programming. Variables have to be understood simply as aliases for expressions (so we don’t have to type everything on one line when writing a long expression). But these variables can’t be modified, so in some sense they can be considered as final or constants.</p>
+
+<h2 id="example-newtons-method-to-calculate-square-roots">Example: Newton’s method to calculate square roots</h2>
+
+<p>There are many methods of computing square roots, Newton’s method is just one of them. It consists on taking an initial guess (i.e. y = 1, but any positive number is OK) and iteratively improve that guess by taking the mean of y and x/y (being x the number for which we want to calculate the square root). So if we want to get the square root for 10, we start by 1 and calculate the mean of 1 and 10/1, which is 5.5. We then calculate the mean of 5.5 and 10/5.5, which is 3.659. We keep doing the same until we get a result that we consider good enough.</p>
+
+<p>More information on the Newton’s method to calculate square roots can be found <a href="http://en.wikipedia.org/wiki/Newton's_method#Square_root_of_a_number">on the Wikipedia</a>.</p>
+
+<p>So we’ll clearly need two functions: one to calculate that mean and get a new guess and another to check if a result is good enough or not. We’ll call those functions <code class="language-plaintext highlighter-rouge">getNewGuess</code> and <code class="language-plaintext highlighter-rouge">isGoodEnough</code>. Once we have them, the square root can be calculated with this function:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">squareRootIter</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span>
+  <span class="nf">if</span> <span class="o">(</span><span class="nf">isGoodEnough</span><span class="o">(</span><span class="n">guess</span><span class="o">,</span> <span class="n">x</span><span class="o">))</span> <span class="n">guess</span>
+  <span class="k">else</span> <span class="nf">squareRootIter</span><span class="o">(</span><span class="nf">getNewGuess</span><span class="o">(</span><span class="n">guess</span><span class="o">,</span> <span class="n">x</span><span class="o">),</span> <span class="n">x</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>We have a recursive function here (a function that calls itself). Recursive functions are a really important part in functional programming, so we’ll see lots of them from now on.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">getNewGuess</code> function can easily be defined according to our previous explanation:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">getNewGuess</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span>
+  <span class="o">(</span><span class="n">guess</span> <span class="o">+</span> <span class="n">x</span> <span class="o">/</span> <span class="n">guess</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">isGoodEnough</code> function requires some extra consideration: when are we actually going to decide that a value is good enough? Well, we could say that it’s good enough if <code class="language-plaintext highlighter-rouge">guess * guess &lt; 0.1</code>. That would work pretty fine for large numbers, but of course it wouldn’t for small ones. A better approach is saying that <code class="language-plaintext highlighter-rouge">abs((guess * guess) - x) &lt; x * 0.05</code>, which gives us an error below 5% (abs is a function with obvious meaning). Let’s go with that:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">isGoodEnough</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span>
+  <span class="nf">abs</span><span class="o">((</span><span class="n">guess</span> <span class="o">*</span> <span class="n">guess</span><span class="o">)</span> <span class="o">-</span> <span class="n">x</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">x</span> <span class="o">*</span> <span class="mf">0.05</span>
+</code></pre></div></div>
+
+<p>With all that we can now ask for <code class="language-plaintext highlighter-rouge">squareRootIter(1, 10)</code> and get a result of 3.196, which is a quite good approximation. But requiring an initial guess is not clean, as any positive initial guess will actually be OK, so we can write a new function like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">squareRoot</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span>
+  <span class="nf">squareRootIter</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>And so we now can get the same 3.196 result just by asking <code class="language-plaintext highlighter-rouge">squareRoot(10)</code>.</p>
+
+<h2 id="implicit-or-explicit-return-type">Implicit or explicit return type</h2>
+
+<p>In the previous example there are some functions (like <code class="language-plaintext highlighter-rouge">isGoodEnough</code> that have an explicit return type, while others (like <code class="language-plaintext highlighter-rouge">squareRoot</code> just have it implicitly). This is because some functions are recursive (they call themselves) while others are not. Recursive functions always need to explicitly declare the return type. Non-recursive functions can declare it as well (and it’s a good idea as it works as source code documentation), but it’s not a requirement.</p>
+
+<h2 id="nested-functions">Nested functions</h2>
+
+<p>In the previous example, we only need <code class="language-plaintext highlighter-rouge">squareRoot</code> function to be available, but instead we have four different functions that can be called by anyone. To prevent this, we can use blocks and nested functions to leave it this cleaner way:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">abs</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span>
+  <span class="nf">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="n">x</span> <span class="k">else</span> <span class="o">-</span><span class="n">x</span>
+
+<span class="k">def</span> <span class="nf">squareRoot</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">squareRootIter</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span>
+	<span class="nf">if</span> <span class="o">(</span><span class="nf">isGoodEnough</span><span class="o">(</span><span class="n">guess</span><span class="o">,</span> <span class="n">x</span><span class="o">))</span> <span class="n">guess</span>
+	<span class="k">else</span> <span class="nf">squareRootIter</span><span class="o">(</span><span class="nf">getNewGuess</span><span class="o">(</span><span class="n">guess</span><span class="o">,</span> <span class="n">x</span><span class="o">),</span> <span class="n">x</span><span class="o">)</span>
+
+  <span class="k">def</span> <span class="nf">getNewGuess</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span>
+	<span class="o">(</span><span class="n">guess</span> <span class="o">+</span> <span class="n">x</span> <span class="o">/</span> <span class="n">guess</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+  <span class="k">def</span> <span class="nf">isGoodEnough</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span>
+	<span class="nf">abs</span><span class="o">((</span><span class="n">guess</span> <span class="o">*</span> <span class="n">guess</span><span class="o">)</span> <span class="o">-</span> <span class="n">x</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">x</span> <span class="o">*</span> <span class="mf">0.05</span>
+
+  <span class="nf">squareRootIter</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Note that although the <code class="language-plaintext highlighter-rouge">abs</code> function could also be nested, it’s the only one that has some real meaning by itself and so it’s useful to leave it unnested so it can be used from any other functions.</p>
+
+<h2 id="blocks">Blocks</h2>
+
+<p>These are some important notions about blocks:</p>
+
+<ul>
+  <li>A block has to finish with a final expression so it can be evaluated.</li>
+  <li>Blocks are themselves expressions in Scala, so a block may appear everywhere an expression can.</li>
+  <li>The definitions inside a block are only visible from within the block.</li>
+  <li>The definitions of outer blocks are visible inside a block unless they are shadowed.</li>
+  <li>The definitions inside a block shadow definitions of the same names outside the block.</li>
+</ul>
+
+<p>Taking this into account, we can rewrite previous definition for <code class="language-plaintext highlighter-rouge">squareRoot</code> so the <code class="language-plaintext highlighter-rouge">x</code> value is not passed as a parameter all the time:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">squareRoot</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">squareRootIter</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span>
+	<span class="nf">if</span> <span class="o">(</span><span class="nf">isGoodEnough</span><span class="o">(</span><span class="n">guess</span><span class="o">))</span> <span class="n">guess</span>
+	<span class="k">else</span> <span class="nf">squareRootIter</span><span class="o">(</span><span class="nf">getNewGuess</span><span class="o">(</span><span class="n">guess</span><span class="o">))</span>
+
+  <span class="k">def</span> <span class="nf">getNewGuess</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span>
+	<span class="o">(</span><span class="n">guess</span> <span class="o">+</span> <span class="n">x</span> <span class="o">/</span> <span class="n">guess</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+  <span class="k">def</span> <span class="nf">isGoodEnough</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span>
+	<span class="nf">abs</span><span class="o">((</span><span class="n">guess</span> <span class="o">*</span> <span class="n">guess</span><span class="o">)</span> <span class="o">-</span> <span class="n">x</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">x</span> <span class="o">*</span> <span class="mf">0.05</span>
+
+  <span class="nf">squareRootIter</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="functional-programming-and-unit-testing">Functional programming and unit testing</h2>
+
+<p>In functional programming, no function can ever cause side effects. That means a function can never modify a value outside of its scope and so the only effect of evaluating a function is its return value, and the only things that affect that return value are the function’s arguments.</p>
+
+<p>As a consequence of this, we can test every function in a program only worrying about its arguments. We don’t need any <code class="language-plaintext highlighter-rouge">setUp</code> or <code class="language-plaintext highlighter-rouge">tearDown</code>. All we need to do is pass arguments that represent edge cases and check the results. If every function in a program passes all unit tests we can be a lot more confident about quality of our software than doing the same when using an imperative language.</p>
+
+
+  </div><a class="u-url" href="/2013/01/12/funprog-week-1-functions-evaluations.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>Email:</li>
+          <li>hello <span class="footer-almost-black">at</span> albertmata <span class="footer-almost-black">dot</span> net</li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/almata"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">almata</span></a></li><li><a href="https://www.linkedin.com/in/almata"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">almata</span></a></li><li><a href="https://www.twitter.com/almata"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">almata</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>
+          This website does not use any cookie and does not collect any data. Read <a href="/privacy/">Privacy</a> for more information.
+          Built with <a href="https://jekyllrb.com">Jekyll</a> and hosted on <a href="https://pages.github.com">GitHub Pages</a>.
+          Maintained with ♥ for the web.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
