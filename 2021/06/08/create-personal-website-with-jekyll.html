@@ -33,21 +33,29 @@
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <h2 id="install-jekyll">Install Jekyll</h2>
+    <h2 id="first-steps">First steps</h2>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gem <span class="nb">install </span>bundler jekyll
-</code></pre></div></div>
+<ol>
+  <li>
+    <p>Install Jekyll:</p>
 
-<h2 id="create-project">Create project</h2>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>gem <span class="nb">install </span>bundler jekyll
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Create project:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>jekyll new AlbertMata
-</code></pre></div></div>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>jekyll new AlbertMata
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Generate site and start web server:</p>
 
-<h2 id="generate-site-and-start-web-server">Generate site and start web server</h2>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>AlbertMata
-<span class="nv">$ </span>bundle <span class="nb">exec </span>jekyll serve
-</code></pre></div></div>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">cd </span>AlbertMata
+ <span class="nv">$ </span>bundle <span class="nb">exec </span>jekyll serve
+</code></pre></div>    </div>
+  </li>
+</ol>
 
 <p>Then we can find the site at <a href="http://localhost:4000">http://localhost:4000</a>.</p>
 
@@ -74,7 +82,7 @@
 
 <p>That is… I have a first Git repository for <em>AlbertMata</em> directory and a second Git repository for <em>_site</em> subdirectory (this <em>_site</em> subdirectory is included in the <em>.gitignore</em> file of the first Git repository).</p>
 
-<h2 id="custom-domains">Custom domains</h2>
+<h2 id="use-custom-domains">Use custom domains</h2>
 
 <p>To redirect <a href="https://albertmata.net">albertmata.net</a> to this website I’ve need to create a file named <em>CNAME</em> in the <em>_site</em> subdirectory with this exact content:</p>
 
