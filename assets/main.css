@@ -60,7 +60,7 @@ em { font-style: normal; color: #7b95c5; }
 /** Custom styles for resume */
 .resume-grayed-out { color: #5c5c5c; font-size: 13.6px; }
 
-.cv-bullet { font-size: 30.6px; color: #b0c034; }
+.cv-bullet { font-size: 29.75px; color: #b0c034; }
 
 /** Wrapper */
 .wrapper { max-width: -webkit-calc(800px - (30px * 2)); max-width: calc(800px - (30px * 2)); margin-right: auto; margin-left: auto; padding-right: 30px; padding-left: 30px; }
