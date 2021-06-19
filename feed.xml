@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-06-17T17:00:18+02:00</updated><id>/feed.xml</id><title type="html">Albert Mata</title><entry><title type="html">Create personal website with Jekyll</title><link href="/2021/06/08/create-personal-website-with-jekyll.html" rel="alternate" type="text/html" title="Create personal website with Jekyll" /><published>2021-06-08T00:00:00+02:00</published><updated>2021-06-08T00:00:00+02:00</updated><id>/2021/06/08/create-personal-website-with-jekyll</id><content type="html" xml:base="/2021/06/08/create-personal-website-with-jekyll.html">&lt;h2 id=&quot;first-steps&quot;&gt;First steps&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-06-19T14:27:09+02:00</updated><id>/feed.xml</id><title type="html">Albert Mata</title><entry><title type="html">Create personal website with Jekyll</title><link href="/2021/06/08/create-personal-website-with-jekyll.html" rel="alternate" type="text/html" title="Create personal website with Jekyll" /><published>2021-06-08T00:00:00+02:00</published><updated>2021-06-08T00:00:00+02:00</updated><id>/2021/06/08/create-personal-website-with-jekyll</id><content type="html" xml:base="/2021/06/08/create-personal-website-with-jekyll.html">&lt;h2 id=&quot;first-steps&quot;&gt;First steps&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
@@ -362,7 +362,128 @@ rvm rubies
 &lt;span class=&quot;c&quot;&gt;# =&amp;gt; - current&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# =* - current &amp;amp;&amp;amp; default&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;#  * - default&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">First of all, to know which Ruby instances are installed at this moment:</summary></entry><entry><title type="html">Create C program from curl command</title><link href="/2018/01/17/create-c-program-from-curl-command.html" rel="alternate" type="text/html" title="Create C program from curl command" /><published>2018-01-17T00:00:00+01:00</published><updated>2018-01-17T00:00:00+01:00</updated><id>/2018/01/17/create-c-program-from-curl-command</id><content type="html" xml:base="/2018/01/17/create-c-program-from-curl-command.html">&lt;p&gt;It’s well known that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;curl&lt;/code&gt; is a tool to transfer data from or to a server, using one of the many supported protocols. For instance:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">First of all, to know which Ruby instances are installed at this moment:</summary></entry><entry><title type="html">Manage various Python versions with Anaconda</title><link href="/2018/02/22/manage-various-python-versions-with-anaconda.html" rel="alternate" type="text/html" title="Manage various Python versions with Anaconda" /><published>2018-02-22T00:00:00+01:00</published><updated>2018-02-22T00:00:00+01:00</updated><id>/2018/02/22/manage-various-python-versions-with-anaconda</id><content type="html" xml:base="/2018/02/22/manage-various-python-versions-with-anaconda.html">&lt;p&gt;By default, on macOS Sierra (10.12.6) we have different versions of Python available:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-lha&lt;/span&gt; /System/Library/Frameworks/Python.framework/Versions
+total 24
+drwxr-xr-x   7 root  wheel   238B Nov  8  2016 &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+drwxr-xr-x   6 root  wheel   204B Nov  8  2016 ..
+lrwxr-xr-x   1 root  wheel     3B Nov  8  2016 2.3 -&amp;gt; 2.6
+lrwxr-xr-x   1 root  wheel     3B Nov  8  2016 2.5 -&amp;gt; 2.6
+drwxr-xr-x  11 root  wheel   374B Aug 13 08:57 2.6
+drwxr-xr-x  11 root  wheel   374B Aug 13 08:57 2.7
+lrwxr-xr-x   1 root  wheel     3B Nov  8  2016 Current -&amp;gt; 2.7
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;So if we navigate to one of those directories and run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python&lt;/code&gt;, we will be using one of the versions that come with macOS:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /System/Library/Frameworks/Python.framework/Versions/2.7/bin
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./python
+Python 2.7.10 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;default, Feb  7 2017, 00:08:15&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;GCC 4.2.1 Compatible Apple LLVM 8.0.0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;clang-800.0.34&lt;span class=&quot;o&quot;&gt;)]&lt;/span&gt; on darwin
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Exactly the same as if we run system’s default &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /usr/bin
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./python
+Python 2.7.10 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;default, Feb  7 2017, 00:08:15&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;GCC 4.2.1 Compatible Apple LLVM 8.0.0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;clang-800.0.34&lt;span class=&quot;o&quot;&gt;)]&lt;/span&gt; on darwin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;anaconda&quot;&gt;Anaconda&lt;/h2&gt;
+
+&lt;p&gt;However, as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/Users/albertmata/anaconda/bin&lt;/code&gt; preceeds &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr/bin&lt;/code&gt; in my &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$PATH&lt;/code&gt; environment variable, if I just run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python&lt;/code&gt; I will not be using system’s default version but the one managed by Anaconda:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;python
+Python 2.7.13 |Anaconda 4.4.0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;x86_64&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;| &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;default, Dec 20 2016, 23:05:08&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;GCC 4.2.1 Compatible Apple LLVM 6.0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;clang-600.0.57&lt;span class=&quot;o&quot;&gt;)]&lt;/span&gt; on darwin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Same thing as if we navigate to where that binary actually is and run it directly:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /Users/albertmata/anaconda/bin
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./python
+Python 2.7.13 |Anaconda 4.4.0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;x86_64&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;| &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;default, Dec 20 2016, 23:05:08&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;GCC 4.2.1 Compatible Apple LLVM 6.0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;clang-600.0.57&lt;span class=&quot;o&quot;&gt;)]&lt;/span&gt; on darwin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;anaconda-environments&quot;&gt;Anaconda environments&lt;/h2&gt;
+
+&lt;p&gt;But we can create another Anaconda environment so we can use i.e. Python 3.6. If we name it &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python36&lt;/code&gt; we’ll be able to use it this way:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /Users/albertmata/anaconda/envs/python36/bin
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./python
+Python 3.6.2 |Continuum Analytics, Inc.| &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;default, Jul 20 2017, 13:14:59&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;GCC 4.2.1 Compatible Apple LLVM 6.0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;clang-600.0.57&lt;span class=&quot;o&quot;&gt;)]&lt;/span&gt; on darwin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Although if we just want to use Python 3.6 by default, all we need to do is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;source activate&lt;/code&gt; that environment and the prompt will change to show we are using an Anaconda environment from now on (we can deactivate it with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;source deactivate&lt;/code&gt; if required):&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;activate python36
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;python36&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;It’s easy to check that Python version in use varies depending on whether we are using an Anaconda environment or not:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;python &lt;span class=&quot;nt&quot;&gt;-V&lt;/span&gt;
+Python 2.7.13 :: Anaconda 4.4.0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;x86_64&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;which python
+/Users/albertmata/anaconda/bin/python
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;-vs-&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;python36&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;python &lt;span class=&quot;nt&quot;&gt;-V&lt;/span&gt;
+Python 3.6.2 :: Continuum Analytics, Inc.
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;python36&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;which python
+/Users/albertmata/anaconda/envs/python36/bin/python
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;source activate&lt;/code&gt; mechanism works because &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;activate&lt;/code&gt; (and also &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deactivate&lt;/code&gt;) is a binary located in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/Users/albertmata/anaconda/bin&lt;/code&gt; -which is the first entry in my &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$PATH&lt;/code&gt; variable- and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;source&lt;/code&gt; is a Unix command that evaluates the file following the command -in this case a script- which &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;source&lt;/code&gt; will run in a subshell instead of in the current context.&lt;/p&gt;
+
+&lt;h2 id=&quot;running-scripts&quot;&gt;Running scripts&lt;/h2&gt;
+
+&lt;p&gt;With all this said, if we want to run a Python script i.e. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;myscript.py&lt;/code&gt; written in Python 3.6 we have different options to achieve the same result.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Option 1:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Hardcode the path to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python&lt;/code&gt; binary to be used at the beginning of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;myscript.py&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#!/Users/albertmata/anaconda/envs/python36/bin/python
+&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Provided our script has execution permission (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;chmod +x myscript.py&lt;/code&gt; otherwise) we can run it like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./myscript.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Option 2:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Forget about that shebang at the beginning of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;myscript.py&lt;/code&gt; and just activate the right environment and run the script using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python&lt;/code&gt; as follows:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;activate python36
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;python36&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;python myscript.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Option 3:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Create a simple shell script i.e. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;myscript.sh&lt;/code&gt; to encapsulate those two commands:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Use Python 3.6&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;activate python36
+&lt;span class=&quot;c&quot;&gt;# Run Python script&lt;/span&gt;
+python myscript.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And then just execute the shell script instead of the Python script:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./myscript.sh 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">By default, on macOS Sierra (10.12.6) we have different versions of Python available:</summary></entry><entry><title type="html">Create C program from curl command</title><link href="/2018/01/17/create-c-program-from-curl-command.html" rel="alternate" type="text/html" title="Create C program from curl command" /><published>2018-01-17T00:00:00+01:00</published><updated>2018-01-17T00:00:00+01:00</updated><id>/2018/01/17/create-c-program-from-curl-command</id><content type="html" xml:base="/2018/01/17/create-c-program-from-curl-command.html">&lt;p&gt;It’s well known that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;curl&lt;/code&gt; is a tool to transfer data from or to a server, using one of the many supported protocols. For instance:&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl https://raw.githubusercontent.com/almata/almata.github.io/master/CNAME
 albertmata.net
@@ -458,152 +579,4 @@ MIT/GNU Scheme running under OS X
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;scheme &lt;span class=&quot;nt&quot;&gt;--quiet&lt;/span&gt; &amp;lt; myprogram.scm
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;scheme &amp;lt; myprogram.scm 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">In theory I just needed to use Homebrew to install MIT Scheme on macOS Sierra:</summary></entry><entry><title type="html">FunProg week 7: Lazy evaluation</title><link href="/2013/03/16/funprog-week-7-lazy-evaluation.html" rel="alternate" type="text/html" title="FunProg week 7: Lazy evaluation" /><published>2013-03-16T00:00:00+01:00</published><updated>2013-03-16T00:00:00+01:00</updated><id>/2013/03/16/funprog-week-7-lazy-evaluation</id><content type="html" xml:base="/2013/03/16/funprog-week-7-lazy-evaluation.html">&lt;p&gt;&lt;em&gt;In September 2012, I enrolled in the course &lt;a href=&quot;https://www.coursera.org/course/progfun&quot;&gt;Functional Programming Principles in Scala&lt;/a&gt; given by Martin Odersky at Coursera. In that course I learnt about functional programming and how it can be effectively combined with object-oriented programming. The series [FunProg week] are my compiled notes from that course.&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;streams&quot;&gt;Streams&lt;/h2&gt;
-
-&lt;p&gt;Streams are like lists, but their tail is evaluated only on demand. In previous sessions we’ve seen a number of immutable collections that provide powerful operations, in particular for combinatorial search, for instance to get the second prime number bigger than 1000:&lt;/p&gt;
-
-&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isPrime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;But this is quite inefficient, as it constructs all prime numbers in the range just to take the second.&lt;/p&gt;
-
-&lt;p&gt;It’s in these situations that we can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Stream&lt;/code&gt;. Streams are similar to lists, but their tail is evaluated only on demand (when it’s needed for the evaluation result, if ever).&lt;/p&gt;
-
-&lt;p&gt;There are three basic ways to create streams:&lt;/p&gt;
-
-&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;xs&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;cons&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;cons&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;empty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;ys&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;zs&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;toStream&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;As an example, these two expressions do the same:&lt;/p&gt;
-
-&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;streamRange1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lo&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hi&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; 
-  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;until&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;toStream&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;streamRange2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lo&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hi&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; 
-  &lt;span class=&quot;nf&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;empty&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;cons&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;streamRange2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Nothing special, the same thing we’ve seen so far in all the previous sessions, but with the important difference that when we use those functions, just the first element is actually created. The rest will be created only when required. So the object knows how to do that. If we request then the tail part, the second element will be created and the rest will wait until required itself.&lt;/p&gt;
-
-&lt;p&gt;Streams support almost all methods of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;List&lt;/code&gt;. So our first example can be rewritten in this much more efficient way:&lt;/p&gt;
-
-&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;toStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isPrime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;But there is an exception: the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;::&lt;/code&gt; operator. It always produces a list, never a stream. To do the same for streams, we have to use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#::&lt;/code&gt; instead (which can be used in expressions as well as patterns).&lt;/p&gt;
-
-&lt;p&gt;In a stream, the tail part is always a call by name parameter, while in lists it’s a call by value parameter. That’s why tail is only evaluated when required.&lt;/p&gt;
-
-&lt;h2 id=&quot;lazy-evaluation&quot;&gt;Lazy evaluation&lt;/h2&gt;
-
-&lt;p&gt;We can understand lazyness as doing things as late as possible and never doing them twice.&lt;/p&gt;
-
-&lt;p&gt;When we work with streams there is a serious potential performance problem: if &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tail&lt;/code&gt; is called several times, the corresponding stream will be recomputed each time. This problem can be avoided by storing the result of the first evaluation of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tail&lt;/code&gt; and re-using the stored result instead of recomputing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tail&lt;/code&gt; next times it’s requested.&lt;/p&gt;
-
-&lt;p&gt;We call this scheme &lt;em&gt;lazy evaluation&lt;/em&gt; (as opposed to &lt;em&gt;by-name evaluation&lt;/em&gt; in the case where everything is recomputed, and &lt;em&gt;strict evaluation&lt;/em&gt; for normal parameters and val definitions).&lt;/p&gt;
-
-&lt;p&gt;Some functional programming languages use lazy evaluation by default (i.e. Haskell) while others use strict evaluation (i.e. Scala). However, in Scala we can ask for a lazy evaluation as follows:&lt;/p&gt;
-
-&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;lazy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;So, the following three expressions are similar, but with an important difference: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; is evaluated every time &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x&lt;/code&gt; is used (1), or is evaluated only when the code reaches that line and then reuses the value (2), or is evaluated only first time it’s going to be used (3):&lt;/p&gt;
-
-&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;lazy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;computing-with-infinite-sequences&quot;&gt;Computing with infinite sequences&lt;/h2&gt;
-
-&lt;p&gt;Lazy evaluation allows us to work with infinite sequences, as any part will only be computed when required. For instance, here is the stream of all integers starting from a given number:&lt;/p&gt;
-
-&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;#::&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;A definition like this would usually be non terminating, but as long as the second part is only evaluated when required, it’s a valid construction in Scala.&lt;/p&gt;
-
-&lt;p&gt;Using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;from&lt;/code&gt; function above we can create a stream with all natural numbers, another stream with all natural numbers multiple of 4 or a list with the first ten multiples of 4:&lt;/p&gt;
-
-&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;nats&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;m4s&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nats&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;map&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m4s&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;take&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;toList&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;example-the-sieve-of-eratosthenes&quot;&gt;Example: the sieve of Eratosthenes&lt;/h2&gt;
-
-&lt;p&gt;In mathematics, the sieve of Eratosthenes is a simple, ancient algorithm for finding all prime numbers up to any given limit. It does so by iteratively marking as composite (i.e. not prime) the multiples of each prime, starting with the multiples of 2. The multiples of a given prime are generated starting from that prime, as a sequence of numbers with the same difference, equal to that prime, between consecutive numbers. This is the sieve’s key distinction from using trial division to sequentially test each candidate number for divisibility by each prime. The sieve of Eratosthenes is one of the most efficient ways to find all of the smaller primes (below 10 million or so).&lt;/p&gt;
-
-&lt;p&gt;More information on the sieve of Eratosthenes can be found &lt;a href=&quot;http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes&quot;&gt;on the Wikipedia&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;The algorithm is as follows: we start with all integers from 2, the first prime number, and eliminate all its multiples; we take the first element of the resulting list, 3, as a prime number and eliminate all its multiples again; we then take the first element of the resulting list, which will be a prime number, and eliminate all its multiples. And so on.&lt;/p&gt;
-
-&lt;p&gt;In Scala:&lt;/p&gt;
-
-&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sieve&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;head&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;#::&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sieve&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;tail&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;filter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;head&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sieve&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;take&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;toList&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//&amp;gt; res3: List[Int] = List(2, 3, 5, 7, 11, 13, 17, 19, 23, 29)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;back-to-square-roots&quot;&gt;Back to square roots&lt;/h2&gt;
-
-&lt;p&gt;In week 1, we got a function to calculate square roots, but we needed a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;isGoodEnough&lt;/code&gt; function to tell when to terminate the iteration. With streams we can now express the concept of a converging sequence without having to worry about when to terminate it:&lt;/p&gt;
-
-&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sqrtStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;improve&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;guess&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;guess&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;guess&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;lazy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;guesses&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;#::&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;guesses&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;map&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;improve&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;guesses&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And now we can calculate square roots as follows:&lt;/p&gt;
-
-&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;sqrtStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;take&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;toList&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Of course we still can use a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;isGoodEnough&lt;/code&gt; function if we want, but while at the beginning we needed it to find a good moment to stop iterating, we now don’t need to worry about that.&lt;/p&gt;
-
-&lt;h2 id=&quot;case-study-the-water-pouring-problem&quot;&gt;Case study: the water pouring problem&lt;/h2&gt;
-
-&lt;p&gt;As a final example for these articles, we’re going to work on the water pouring problem. It’s a well known example solved many times, but this time we’re going to solve it with a pure functional approach.&lt;/p&gt;
-
-&lt;p&gt;Put it short, we assume we have a big tank full of water and two recipients of different sizes (i.e. 5 and 3 liters) and want to get a concrete volume of water (i.e. 2 liters). In this obvious example, it’d be enough to fill the 5 liters recipient from the tank, then fill the 3 liters recipient using the 5 liters one, and when it’s full, we’d have 2 liters of water in the 5 liters recipient. If, with the same recipients, we’d want to get 4 liters it’d be a little more complicated.&lt;/p&gt;
-
-&lt;p&gt;We’re going to solve the general case: an arbitrary number of glasses with arbitrary capacities to get an arbitrary target capacity in one of the glasses.&lt;/p&gt;
-
-&lt;p&gt;For that, we will represent our problem this way:&lt;/p&gt;
-
-&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;Glass&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;
-&lt;span class=&quot;nc&quot;&gt;State&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;entry&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;per&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;glass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nc&quot;&gt;Three&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;possible&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;moves&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt;
-	&lt;span class=&quot;kt&quot;&gt;Empty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;glass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;kt&quot;&gt;Fill&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;glass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;kt&quot;&gt;Pour&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And the idea is to represent all possible states until one of them shows in any glass our target capacity. To do so, we begin with a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(0,0)&lt;/code&gt; state and create all possible states using available moves. From each one, we do the same again. And keep doing until we reach a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(x,6)&lt;/code&gt; state. We’ll then have a path to get that state. Of course we have to check all the time if we are in a loop (which will mean there is no solution).&lt;/p&gt;
-
-&lt;h2 id=&quot;epilogue&quot;&gt;Epilogue&lt;/h2&gt;
-
-&lt;p&gt;In these 7 weeks we’ve seen some important functional programming concepts:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;higher order functions,&lt;/li&gt;
-  &lt;li&gt;case classes and pattern matching,&lt;/li&gt;
-  &lt;li&gt;immutable collections,&lt;/li&gt;
-  &lt;li&gt;absence of mutable state,&lt;/li&gt;
-  &lt;li&gt;flexible evaluation strategies: strict / lazy / by name.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Of course there is much more in Scala. Here are some good resources to keep learning:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://twitter.github.com/scala_school/&quot;&gt;Twitter Scala School&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;http://typesafe.com/&quot;&gt;Typesafe&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;http://www.cakesolutions.net/teamblogs/topic/scala&quot;&gt;This week in Scala&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">In September 2012, I enrolled in the course Functional Programming Principles in Scala given by Martin Odersky at Coursera. In that course I learnt about functional programming and how it can be effectively combined with object-oriented programming. The series [FunProg week] are my compiled notes from that course.</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">In theory I just needed to use Homebrew to install MIT Scheme on macOS Sierra:</summary></entry></feed>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/assets/main.css">
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Albert Mata</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          <a class="page-link" href="/">Home</a><a class="page-link" href="/notes/">Notes</a><a class="page-link" href="/skills/">Skills</a><a class="page-link" href="/resume/">Resume</a><a class="page-link" href="/privacy/">Privacy</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Manage various Python versions with Anaconda</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-02-22T00:00:00+01:00" itemprop="datePublished">Feb 22, 2018
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>By default, on macOS Sierra (10.12.6) we have different versions of Python available:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-lha</span> /System/Library/Frameworks/Python.framework/Versions
+total 24
+drwxr-xr-x   7 root  wheel   238B Nov  8  2016 <span class="nb">.</span>
+drwxr-xr-x   6 root  wheel   204B Nov  8  2016 ..
+lrwxr-xr-x   1 root  wheel     3B Nov  8  2016 2.3 -&gt; 2.6
+lrwxr-xr-x   1 root  wheel     3B Nov  8  2016 2.5 -&gt; 2.6
+drwxr-xr-x  11 root  wheel   374B Aug 13 08:57 2.6
+drwxr-xr-x  11 root  wheel   374B Aug 13 08:57 2.7
+lrwxr-xr-x   1 root  wheel     3B Nov  8  2016 Current -&gt; 2.7
+</code></pre></div></div>
+
+<p>So if we navigate to one of those directories and run <code class="language-plaintext highlighter-rouge">python</code>, we will be using one of the versions that come with macOS:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /System/Library/Frameworks/Python.framework/Versions/2.7/bin
+<span class="nv">$ </span>./python
+Python 2.7.10 <span class="o">(</span>default, Feb  7 2017, 00:08:15<span class="o">)</span> 
+<span class="o">[</span>GCC 4.2.1 Compatible Apple LLVM 8.0.0 <span class="o">(</span>clang-800.0.34<span class="o">)]</span> on darwin
+...
+</code></pre></div></div>
+
+<p>Exactly the same as if we run system’s default <code class="language-plaintext highlighter-rouge">python</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /usr/bin
+<span class="nv">$ </span>./python
+Python 2.7.10 <span class="o">(</span>default, Feb  7 2017, 00:08:15<span class="o">)</span> 
+<span class="o">[</span>GCC 4.2.1 Compatible Apple LLVM 8.0.0 <span class="o">(</span>clang-800.0.34<span class="o">)]</span> on darwin
+</code></pre></div></div>
+
+<h2 id="anaconda">Anaconda</h2>
+
+<p>However, as <code class="language-plaintext highlighter-rouge">/Users/albertmata/anaconda/bin</code> preceeds <code class="language-plaintext highlighter-rouge">/usr/bin</code> in my <code class="language-plaintext highlighter-rouge">$PATH</code> environment variable, if I just run <code class="language-plaintext highlighter-rouge">python</code> I will not be using system’s default version but the one managed by Anaconda:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>python
+Python 2.7.13 |Anaconda 4.4.0 <span class="o">(</span>x86_64<span class="o">)</span>| <span class="o">(</span>default, Dec 20 2016, 23:05:08<span class="o">)</span> 
+<span class="o">[</span>GCC 4.2.1 Compatible Apple LLVM 6.0 <span class="o">(</span>clang-600.0.57<span class="o">)]</span> on darwin
+</code></pre></div></div>
+
+<p>Same thing as if we navigate to where that binary actually is and run it directly:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /Users/albertmata/anaconda/bin
+<span class="nv">$ </span>./python
+Python 2.7.13 |Anaconda 4.4.0 <span class="o">(</span>x86_64<span class="o">)</span>| <span class="o">(</span>default, Dec 20 2016, 23:05:08<span class="o">)</span> 
+<span class="o">[</span>GCC 4.2.1 Compatible Apple LLVM 6.0 <span class="o">(</span>clang-600.0.57<span class="o">)]</span> on darwin
+</code></pre></div></div>
+
+<h2 id="anaconda-environments">Anaconda environments</h2>
+
+<p>But we can create another Anaconda environment so we can use i.e. Python 3.6. If we name it <code class="language-plaintext highlighter-rouge">python36</code> we’ll be able to use it this way:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /Users/albertmata/anaconda/envs/python36/bin
+<span class="nv">$ </span>./python
+Python 3.6.2 |Continuum Analytics, Inc.| <span class="o">(</span>default, Jul 20 2017, 13:14:59<span class="o">)</span> 
+<span class="o">[</span>GCC 4.2.1 Compatible Apple LLVM 6.0 <span class="o">(</span>clang-600.0.57<span class="o">)]</span> on darwin
+</code></pre></div></div>
+
+<p>Although if we just want to use Python 3.6 by default, all we need to do is <code class="language-plaintext highlighter-rouge">source activate</code> that environment and the prompt will change to show we are using an Anaconda environment from now on (we can deactivate it with <code class="language-plaintext highlighter-rouge">source deactivate</code> if required):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">source </span>activate python36
+<span class="o">(</span>python36<span class="o">)</span> <span class="nv">$ </span>
+</code></pre></div></div>
+
+<p>It’s easy to check that Python version in use varies depending on whether we are using an Anaconda environment or not:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>python <span class="nt">-V</span>
+Python 2.7.13 :: Anaconda 4.4.0 <span class="o">(</span>x86_64<span class="o">)</span>
+<span class="nv">$ </span>which python
+/Users/albertmata/anaconda/bin/python
+</code></pre></div></div>
+
+<p>-vs-</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>python36<span class="o">)</span> <span class="nv">$ </span>python <span class="nt">-V</span>
+Python 3.6.2 :: Continuum Analytics, Inc.
+<span class="o">(</span>python36<span class="o">)</span> <span class="nv">$ </span>which python
+/Users/albertmata/anaconda/envs/python36/bin/python
+</code></pre></div></div>
+
+<p>This <code class="language-plaintext highlighter-rouge">source activate</code> mechanism works because <code class="language-plaintext highlighter-rouge">activate</code> (and also <code class="language-plaintext highlighter-rouge">deactivate</code>) is a binary located in <code class="language-plaintext highlighter-rouge">/Users/albertmata/anaconda/bin</code> -which is the first entry in my <code class="language-plaintext highlighter-rouge">$PATH</code> variable- and <code class="language-plaintext highlighter-rouge">source</code> is a Unix command that evaluates the file following the command -in this case a script- which <code class="language-plaintext highlighter-rouge">source</code> will run in a subshell instead of in the current context.</p>
+
+<h2 id="running-scripts">Running scripts</h2>
+
+<p>With all this said, if we want to run a Python script i.e. <code class="language-plaintext highlighter-rouge">myscript.py</code> written in Python 3.6 we have different options to achieve the same result.</p>
+
+<p><strong>Option 1:</strong></p>
+
+<p>Hardcode the path to the <code class="language-plaintext highlighter-rouge">python</code> binary to be used at the beginning of <code class="language-plaintext highlighter-rouge">myscript.py</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/Users/albertmata/anaconda/envs/python36/bin/python
+</span><span class="kn">import</span> <span class="nn">...</span>
+</code></pre></div></div>
+
+<p>Provided our script has execution permission (<code class="language-plaintext highlighter-rouge">chmod +x myscript.py</code> otherwise) we can run it like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./myscript.py
+</code></pre></div></div>
+
+<p><strong>Option 2:</strong></p>
+
+<p>Forget about that shebang at the beginning of <code class="language-plaintext highlighter-rouge">myscript.py</code> and just activate the right environment and run the script using <code class="language-plaintext highlighter-rouge">python</code> as follows:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">source </span>activate python36
+<span class="o">(</span>python36<span class="o">)</span> <span class="nv">$ </span>python myscript.py
+</code></pre></div></div>
+
+<p><strong>Option 3:</strong></p>
+
+<p>Create a simple shell script i.e. <code class="language-plaintext highlighter-rouge">myscript.sh</code> to encapsulate those two commands:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="c"># Use Python 3.6</span>
+<span class="nb">source </span>activate python36
+<span class="c"># Run Python script</span>
+python myscript.py
+</code></pre></div></div>
+
+<p>And then just execute the shell script instead of the Python script:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./myscript.sh 
+</code></pre></div></div>
+
+  </div><a class="u-url" href="/2018/02/22/manage-various-python-versions-with-anaconda.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>Email:</li>
+          <li>hello <span class="footer-almost-black">at</span> albertmata <span class="footer-almost-black">dot</span> net</li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/almata"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">almata</span></a></li><li><a href="https://www.linkedin.com/in/almata"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">almata</span></a></li><li><a href="https://www.twitter.com/almata"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">almata</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>
+          This website does not use any cookie and does not collect any data. Read <a href="/privacy/">Privacy</a> for more information.
+          Built with <a href="https://jekyllrb.com">Jekyll</a> and hosted on <a href="https://pages.github.com">GitHub Pages</a>.
+          Maintained with ♥ for the web.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
