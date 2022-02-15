@@ -62,6 +62,11 @@ em { font-style: normal; color: #7b95c5; }
 
 .cv-bullet { font-size: 29.75px; color: #b0c034; }
 
+/** Custom styles for headshot */
+.div-headshot { text-align: center; margin-bottom: 20px; }
+
+.headshot { width: 250px; border-radius: 50%; border: 5px solid #7b95c5; }
+
 /** Wrapper */
 .wrapper { max-width: -webkit-calc(800px - (30px * 2)); max-width: calc(800px - (30px * 2)); margin-right: auto; margin-left: auto; padding-right: 30px; padding-left: 30px; }
 
