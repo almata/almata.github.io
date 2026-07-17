@@ -1,0 +1,48 @@
+.theme-toggle {
+  order: 3;
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  margin: 0 0 0 20px;
+  padding: 0;
+  color: var(--color-primary);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition:
+    color 150ms ease,
+    transform 150ms ease;
+}
+
+.theme-toggle:hover {
+  color: var(--color-primary-hover);
+  transform: rotate(10deg);
+}
+
+.theme-toggle svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.theme-icon-moon,
+html[data-theme='light'] .theme-icon-sun {
+  display: none;
+}
+
+html[data-theme='light'] .theme-icon-moon {
+  display: block;
+}
+
+@media screen and (max-width: 600px) {
+  .theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 3rem;
+  }
+}
