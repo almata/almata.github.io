@@ -47,6 +47,11 @@ html[data-theme='light'] .theme-icon-moon {
     height: 44px;
   }
 
+  .theme-toggle:hover {
+    color: var(--color-primary);
+    transform: none;
+  }
+
   .theme-toggle svg {
     width: 32px;
     height: 32px;
