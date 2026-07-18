@@ -58,7 +58,6 @@ body {
 
 h1,
 h2,
-h3,
 p,
 ul {
   margin-bottom: 1rem;
@@ -154,6 +153,10 @@ main h1 {
   margin-bottom: 2rem;
 }
 
+main h3 {
+  color: var(--color-accent);
+}
+
 hr {
   border: 0;
   border-top: 1px solid var(--color-muted);
@@ -172,6 +175,24 @@ em {
 small {
   color: var(--color-muted);
   font-size: var(--font-size-small);
+}
+
+time {
+  color: var(--color-muted);
+  font-size: var(--font-size-small);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.project {
+  display: inline-block;
+  padding: 0.1em 0.5em;
+  color: var(--color-surface);
+  background-color: var(--color-primary);
+  border-radius: 0.5em;
+  font-size: calc(var(--font-size-small) * 0.75);
+  margin-left: 0.5em;
+  transform: translateY(-0.25em);
 }
 
 /*#endregion Custom tags and classes */
