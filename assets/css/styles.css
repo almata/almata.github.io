@@ -156,6 +156,12 @@ main h1 {
   margin-bottom: 2rem;
 }
 
+@media screen and (max-width: 600px) {
+  main h1 {
+    font-size: var(--font-size-h1-mobile);
+  }
+}
+
 main h3 {
   color: var(--color-accent);
 }
@@ -265,6 +271,7 @@ small {
     background-color: transparent;
     text-align: right;
   }
+
   .site-nav .nav-trigger {
     position: absolute;
     top: 0;
