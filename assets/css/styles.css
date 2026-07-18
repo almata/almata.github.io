@@ -85,9 +85,11 @@ li {
 }
 
 .avatar {
+  display: block;
   width: 300px;
+  max-width: 100%;
   height: auto;
-  aspect-ratio: 1 / 1;
+  margin-inline: auto;
   border-radius: 50%;
   border: 6px solid var(--color-accent);
 }
