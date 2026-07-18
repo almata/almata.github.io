@@ -14,8 +14,9 @@
 
   --font-size-small: 14px;
   --font-size-base: 18px;
-  --font-size-title1: 30px;
-  --font-size-title2: 48px;
+  --font-size-h2: 30px;
+  --font-size-h1: 48px;
+  --font-size-h1-mobile: 40px;
 }
 
 :root[data-theme='light'] {
@@ -150,7 +151,7 @@ main {
 }
 
 main h1 {
-  font-size: var(--font-size-title2);
+  font-size: var(--font-size-h1);
   line-height: 1;
   margin-bottom: 2rem;
 }
@@ -212,7 +213,7 @@ small {
 }
 
 .site-title {
-  font-size: var(--font-size-title2);
+  font-size: var(--font-size-h1);
   line-height: 2;
 }
 
@@ -253,6 +254,10 @@ small {
 }
 
 @media screen and (max-width: 600px) {
+  .site-title {
+    font-size: var(--font-size-h1-mobile);
+  }
+
   .site-nav {
     position: absolute;
     top: calc(50% - 22px);
@@ -292,6 +297,7 @@ small {
     width: 36px;
     height: 36px;
     stroke: currentColor;
+    stroke-width: 2;
   }
 
   .site-nav input ~ .trigger {
