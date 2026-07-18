@@ -253,6 +253,7 @@ small {
 @media screen and (max-width: 600px) {
   .site-nav {
     position: absolute;
+    top: calc(50% - 22px);
     right: 1rem;
     background-color: transparent;
     text-align: right;
