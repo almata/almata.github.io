@@ -177,7 +177,7 @@ small {
   font-size: var(--font-size-small);
 }
 
-time {
+.time {
   color: var(--color-muted);
   font-size: var(--font-size-small);
   margin-bottom: 1rem;
@@ -204,6 +204,7 @@ time {
 }
 
 .site-header .wrapper {
+  position: relative;
   display: flex;
   align-items: center;
 }
@@ -252,7 +253,6 @@ time {
 @media screen and (max-width: 600px) {
   .site-nav {
     position: absolute;
-    top: 1rem;
     right: 1rem;
     background-color: transparent;
     text-align: right;
@@ -262,8 +262,8 @@ time {
     top: 0;
     right: 0;
     display: block;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     margin: 0;
     opacity: 0;
   }
@@ -271,8 +271,8 @@ time {
     display: grid;
     place-items: center;
     float: right;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     color: var(--color-primary);
     background-color: transparent;
     border: 0;
@@ -286,8 +286,8 @@ time {
   }
 
   .site-nav .menu-icon > svg {
-    width: 22px;
-    height: 22px;
+    width: 36px;
+    height: 36px;
     stroke: currentColor;
   }
 

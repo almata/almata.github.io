@@ -42,7 +42,13 @@ html[data-theme='light'] .theme-icon-moon {
 @media screen and (max-width: 600px) {
   .theme-toggle {
     position: absolute;
-    top: 1rem;
-    right: 3rem;
+    right: 4.25rem;
+    width: 44px;
+    height: 44px;
+  }
+
+  .theme-toggle svg {
+    width: 32px;
+    height: 32px;
   }
 }
