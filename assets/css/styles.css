@@ -259,17 +259,17 @@ small {
   text-decoration: underline;
 }
 
-.site-nav .page-link:not(:last-child) {
-  margin-right: 1.5rem;
+.site-nav .trigger {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .language-switch {
-  order: 3;
   display: flex;
   align-items: center;
   color: var(--color-primary);
   gap: 0.25rem;
-  margin-left: 1rem;
   font-size: var(--font-size-small);
   white-space: nowrap;
 }
@@ -300,7 +300,15 @@ small {
   }
 
   .language-switch {
-    margin-left: 0;
+    justify-content: flex-end;
+    font-size: inherit;
+    margin: 5px 5px 0 10px;
+    border-top: 1px solid var(--color-faint);
+  }
+
+  .language-switch a {
+    justify-content: center;
+    min-width: 44px;
   }
 
   .site-nav {
@@ -309,6 +317,7 @@ small {
     right: 1rem;
     background-color: transparent;
     text-align: right;
+    z-index: 1;
   }
 
   .site-nav .nav-trigger {
