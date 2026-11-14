@@ -1,10 +1,11 @@
 .theme-toggle {
-  order: 3;
+  order: 4;
   display: inline-grid;
   place-items: center;
   width: 36px;
   height: 36px;
-  margin: 0 0 0 20px;
+  margin: 0 0 0 8px;
+  flex-shrink: 0;
   padding: 0;
   color: var(--color-primary);
   background: transparent;
@@ -39,10 +40,9 @@ html[data-theme='light'] .theme-icon-moon {
   display: block;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
   .theme-toggle {
-    position: absolute;
-    right: 4.25rem;
+    margin: 0;
     width: 44px;
     height: 44px;
   }

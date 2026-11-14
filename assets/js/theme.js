@@ -29,7 +29,11 @@ export function enableThemeButton() {
 function updateToggle(button) {
   const root = document.documentElement
   const isDark = root.dataset.theme === 'dark'
-  button.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme')
-  button.setAttribute('title', isDark ? 'Switch to light theme' : 'Switch to dark theme')
+  const isCatalan = root.lang === 'ca'
+  const label = isCatalan
+    ? (isDark ? 'Canvia al tema clar' : 'Canvia al tema fosc')
+    : (isDark ? 'Switch to light theme' : 'Switch to dark theme')
+  button.setAttribute('aria-label', label)
+  button.setAttribute('title', label)
   button.setAttribute('aria-pressed', String(!isDark))
 }

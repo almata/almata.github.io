@@ -29,7 +29,7 @@
   --color-faint: #bbb;
   --color-primary: #b15;
   --color-primary-hover: #e48;
-  --color-accent: #359;
+  --color-accent: #1664c0;
 }
 
 /*#endregion Custom properties */
@@ -263,9 +263,44 @@ small {
   margin-right: 1.5rem;
 }
 
-@media screen and (max-width: 600px) {
+.language-switch {
+  order: 3;
+  display: flex;
+  align-items: center;
+  color: var(--color-primary);
+  gap: 0.25rem;
+  margin-left: 1rem;
+  font-size: var(--font-size-small);
+  white-space: nowrap;
+}
+
+.language-switch a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.language-switch [aria-current='page'] {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media screen and (max-width: 700px) {
+  .site-header .wrapper {
+    min-height: 80px;
+    padding-right: calc(1rem + 48px);
+    gap: 4px;
+  }
+
   .site-title {
-    font-size: var(--font-size-h1-mobile);
+    font-size: clamp(22px, 5.5vw, 40px);
+    margin-right: auto;
+    white-space: nowrap;
+  }
+
+  .language-switch {
+    margin-left: 0;
   }
 
   .site-nav {

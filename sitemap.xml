@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://albertmata.net/</loc></url>
-  <url><loc>https://albertmata.net/profile/</loc></url>
-  <!-- <url><loc>https://albertmata.net/articles/</loc></url> -->
-  <url><loc>https://albertmata.net/privacy/</loc></url>
+  <url><loc>https://albertmata.net/ca/</loc></url>
+  <url><loc>https://albertmata.net/ca/profile/</loc></url>
+  <url><loc>https://albertmata.net/ca/privacy/</loc></url>
+  <url><loc>https://albertmata.net/en/</loc></url>
+  <url><loc>https://albertmata.net/en/profile/</loc></url>
+  <url><loc>https://albertmata.net/en/privacy/</loc></url>
 </urlset>
